@@ -45,7 +45,7 @@ public class Motions extends RoboticsAPIApplication {
 
 		getLogger().info("Move to start position of the lemniscate motion");	
 		PTP ptpToLoopCenter = ptp(loopCenterPosition);
-		ptpToLoopCenter.setJointVelocityRel(1.00);
+		ptpToLoopCenter.setJointVelocityRel(0.25);
 		lbr.move(ptpToLoopCenter);
 
 		getLogger().info("Compute spline for lemniscate motion");	
@@ -53,24 +53,24 @@ public class Motions extends RoboticsAPIApplication {
 		Spline lemniscateSpline = createLemniscateSpline(startFrame).setJointJerkRel(0.5).setCartVelocity(250);
 
 		getLogger().info("Execute lemniscate motion");
-		lemniscateSpline.setJointVelocityRel(1.00);
+		lemniscateSpline.setJointVelocityRel(0.25);
 		lbr.move(lemniscateSpline);
 
 		getLogger().info("Move in nullspace -"+nullSpaceAngle+"?");		
 		Frame centerFrameWithChangedE1_1 = createChildFrameAndSetE1Offset(startFrame,Math.toRadians(-nullSpaceAngle));
 		LIN linToCenterFrameWithE1_1 = lin(centerFrameWithChangedE1_1);
-		linToCenterFrameWithE1_1.setJointVelocityRel(1.00);
+		linToCenterFrameWithE1_1.setJointVelocityRel(0.25);
 		lbr.move(linToCenterFrameWithE1_1);
 
 		getLogger().info("Move in nullspace "+nullSpaceAngle+"?");
 		Frame centerFrameWithChangedE1_2 = createChildFrameAndSetE1Offset(startFrame,Math.toRadians(nullSpaceAngle));
 		LIN linToCenterFrameWithE1_2 = lin(centerFrameWithChangedE1_2);
-		linToCenterFrameWithE1_2.setJointVelocityRel(1.00);
+		linToCenterFrameWithE1_2.setJointVelocityRel(0.25);
 		lbr.move(linToCenterFrameWithE1_2);
 		
 		getLogger().info("Move to start position");
 		LIN linToStartFrame = lin(startFrame);
-		linToStartFrame.setJointVelocityRel(1.00);
+		linToStartFrame.setJointVelocityRel(0.25);
 		lbr.move(linToStartFrame);
 	}
 
