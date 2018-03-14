@@ -107,6 +107,18 @@
                 </redundancyData>
             </frame>
         </frame>
+        <frame id="_76448f82-a7b6-4f95-a37f-7e8b5c89492c" name="Knee">
+            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+            <additionalInformation>
+                <info key="LastModificationTime" type="java.lang.Long" value="1521036619212"/>
+            </additionalInformation>
+            <frame id="_aa06eb75-b81e-4949-accc-d9de20955885" name="P1">
+                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <additionalInformation>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521036631362"/>
+                </additionalInformation>
+            </frame>
+        </frame>
     </world>
     <objectTemplates>
         <toolTemplate class="" name="LegLift">
@@ -125,5 +137,16 @@
             </frames>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.15"/>
         </toolTemplate>
+        <workpieceTemplate class="" name="Leg">
+            <frames>
+                <frame id="_dee5bdcc-734a-4028-9fab-4a2a8e16174a" name="PnpChild">
+                    <transformation a="0.0" b="0.0" c="0.0" x="125.0" y="0.0" z="0.0"/>
+                </frame>
+                <frame id="_d28021d5-9cce-4490-8214-a831dd31dcdc" name="TCPKnee">
+                    <transformation a="0.0" b="0.0" c="0.0" x="340.0" y="0.0" z="0.0"/>
+                </frame>
+            </frames>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="170.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.01"/>
+        </workpieceTemplate>
     </objectTemplates>
 </RoboticsAPIData>
