@@ -2,9 +2,13 @@ package programIMERIR;
 
 
 import javax.inject.Inject;
+import javax.inject.Named;
+
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
+import com.kuka.roboticsAPI.geometricModel.Tool;
+import com.kuka.roboticsAPI.geometricModel.Workpiece;
 
 /**
  * Implementation of a robot application.
@@ -26,16 +30,25 @@ import com.kuka.roboticsAPI.deviceModel.LBR;
  */
 public class TrainingKnee extends RoboticsAPIApplication {
 	@Inject
-	private LBR lBR_iiwa_14_R820_1;
-
+	private LBR robot;
+	@Inject
+	@Named("LegLift")
+	private Tool legLift;//Création d'un objet outil
+	@Inject
+	@Named("Leg")
+	private Workpiece leg;
 	@Override
 	public void initialize() {
 		// initialize your application here
+		legLift.attachTo(robot.getFlange());
 	}
 
 	@Override
 	public void run() {
 		// your application execution starts here
-		lBR_iiwa_14_R820_1.move(ptpHome());
+		robot.move(ptpHome());
+		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")));
+		robot.move(ptpHome());
+		
 	}
 }
