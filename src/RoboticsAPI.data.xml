@@ -118,7 +118,7 @@
                     <transformation a="0.0" b="0.0" c="0.0" x="-38.826061" y="-4.297067" z="237.296734"/>
                     <frames>
                         <frame id="_b4d711c0-78ec-4677-8495-fe4a0748dd3e" name="pnpParent">
-                            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="-63.0"/>
+                            <transformation a="-1.5707963267948966" b="0.0" c="0.0" x="0.0" y="0.0" z="-63.0"/>
                         </frame>
                     </frames>
                 </frame>
