@@ -4,6 +4,7 @@ package programIMERIR;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kuka.common.ThreadUtil;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
@@ -48,6 +49,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		// your application execution starts here
 		robot.move(ptpHome());
 		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")));
+		ThreadUtil.milliSleep(10000);
 		robot.move(ptpHome());
 		
 	}
