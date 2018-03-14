@@ -3,12 +3,12 @@
     <world>
         <gravitation x="0.0" y="0.0" z="9.81"/>
         <frame id="_2ffb18c4-5a12-4922-970b-511e3dffd20b" name="Foam">
-            <transformation a="0.5834203477008058" b="0.17186334874049056" c="0.011249368737924655" x="226.34491546866778" y="-632.5327544867173" z="664.7737957713884"/>
+            <transformation a="0.5664274093243586" b="0.1806197483029666" c="-0.021533475343363005" x="211.04959995634" y="-611.6103444143314" z="677.1718197062298"/>
             <additionalInformation>
-                <info key="LastModificationTime" type="java.lang.Long" value="1521015658531"/>
+                <info key="LastModificationTime" type="java.lang.Long" value="1521020669380"/>
                 <info key="Comment" type="java.lang.String" value="Repère base sur le polystirène."/>
                 <info key="UseAsBaseForJogging" type="java.lang.Boolean" value="true"/>
-                <info measurementMethod="Base3Point" timestamp="1521015658531" type="com.kuka.roboticsAPI.deviceModel.MeasurementInformation"/>
+                <info measurementMethod="Base3Point" timestamp="1521020669380" type="com.kuka.roboticsAPI.deviceModel.MeasurementInformation"/>
             </additionalInformation>
             <frame id="_75ede14d-5c1f-4929-b534-c4ba1a0766b8" name="P1">
                 <transformation a="-2.205196446408436" b="1.1285660036831788" c="-0.49710981198022497" x="420.96654452042833" y="105.19257637898068" z="2.026281683727575"/>
