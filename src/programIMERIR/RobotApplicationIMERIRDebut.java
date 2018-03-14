@@ -6,7 +6,6 @@ import javax.inject.Named;
 
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
-
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 
@@ -47,11 +46,15 @@ public class RobotApplicationIMERIRDebut extends RoboticsAPIApplication {
 		// your application execution starts here
 		robot.move(ptpHome());
 		legLift.getFrame("TCP").move(ptp(getApplicationData().getFrame("/Foam/P1")));
+		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P5")));
 		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P2")));
-		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P5")));//comme ca le robot bouge du point home au point P1. 
-		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P3")));//comme ca le robot bouge du point home au point P1. 
-		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P4")));		
 		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P6")));
+		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P3")));
+		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P4")));
+		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P5")));
+		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P3")));
+		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P6")));
+		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P1")));
 		robot.move(ptpHome());
 	}
 }
