@@ -116,6 +116,11 @@
                 </frame>
                 <frame id="_07194ca3-2f55-4014-ac20-7cda23e00de8" name="dummy">
                     <transformation a="0.0" b="0.0" c="0.0" x="-38.826061" y="-4.297067" z="237.296734"/>
+                    <frames>
+                        <frame id="_b4d711c0-78ec-4677-8495-fe4a0748dd3e" name="pnpParent">
+                            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="-63.0"/>
+                        </frame>
+                    </frames>
                 </frame>
             </frames>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.15"/>
