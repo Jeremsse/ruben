@@ -51,7 +51,6 @@ public class RobotApplicationIMERIRDebut extends RoboticsAPIApplication {
 		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P4")));
 		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P5")));
 		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P6")));
-		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P7")));
 		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P1")));
 		robot.move(ptpHome());
 	}
