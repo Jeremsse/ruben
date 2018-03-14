@@ -38,6 +38,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 	@Inject
 	@Named("Leg")
 	private Workpiece leg;
+	private int i;
 	@Override
 	public void initialize() {
 		// initialize your application here
@@ -50,7 +51,17 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		robot.move(ptpHome());
 		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
 		ThreadUtil.milliSleep(10000);
-		robot.move(ptpHome());
+		// Ancrage de la jambe à l'outil
+		leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
+		for (i=1;i<5;i++){
+			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-20),0, 0).setCartVelocity(30));
+			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(20),0, 0).setCartVelocity(30));
+		}
+		ThreadUtil.milliSleep(10000);
+		leg.detach();
+		robot.move(ptpHome().setJointVelocityRel(0.5));
+		
+		robot.move(ptpHome().setJointVelocityRel(0.5));
 		
 	}
 }
