@@ -10,6 +10,42 @@
                 <info key="UseAsBaseForJogging" type="java.lang.Boolean" value="true"/>
                 <info measurementMethod="Base3Point" timestamp="1521015658531" type="com.kuka.roboticsAPI.deviceModel.MeasurementInformation"/>
             </additionalInformation>
+            <frame id="_75ede14d-5c1f-4929-b534-c4ba1a0766b8" name="P1">
+                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <additionalInformation>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521016227829"/>
+                </additionalInformation>
+            </frame>
+            <frame id="_60d556f4-1e5e-4cbc-b90d-c3ac9d015f05" name="P2">
+                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <additionalInformation>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521016237774"/>
+                </additionalInformation>
+            </frame>
+            <frame id="_8d8d1a57-dc59-4706-bd05-1c24ecc76064" name="P3">
+                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <additionalInformation>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521016239789"/>
+                </additionalInformation>
+            </frame>
+            <frame id="_81113c16-410d-4973-adf3-a63a88f87cc5" name="P4">
+                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <additionalInformation>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521016241685"/>
+                </additionalInformation>
+            </frame>
+            <frame id="_7e705e21-ac54-4738-98bc-32119bd41055" name="P5">
+                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <additionalInformation>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521016243557"/>
+                </additionalInformation>
+            </frame>
+            <frame id="_2fb73b58-bbd9-48c2-8cef-147f58016b54" name="P6">
+                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <additionalInformation>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521016246206"/>
+                </additionalInformation>
+            </frame>
         </frame>
     </world>
     <objectTemplates>
