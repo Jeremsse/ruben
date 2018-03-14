@@ -7,8 +7,9 @@
         <toolTemplate class="" name="LegLift">
             <frames>
                 <frame id="_9ae17709-e023-4f4f-a076-7f864e49d0a4" name="TCP">
-                    <transformation a="0.0" b="0.0" c="0.0" x="-38.8260612841462" y="-4.297067247751202" z="237.29673441185474"/>
+                    <transformation a="-0.2648909550439505" b="-0.9716926483625626" c="0.0" x="-38.8260612841462" y="-4.297067247751202" z="237.29673441185474"/>
                     <measurementTranslation calculationError="1.357576345185995" method="XYZ4Point" timestamp="1520956751832"/>
+                    <measurementRotation method="ABCWorld5D" timestamp="1521013204115"/>
                 </frame>
             </frames>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.15"/>
