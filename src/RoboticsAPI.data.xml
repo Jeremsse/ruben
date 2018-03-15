@@ -142,7 +142,7 @@
                     <transformation a="0.0" b="0.0" c="0.0" x="-38.826061" y="-4.297067" z="237.296734"/>
                     <frames>
                         <frame id="_788c818d-982f-4d19-a602-60812b248199" name="PNP_parent">
-                            <transformation a="0.0" b="-1.5707963267948966" c="0.0" x="0.0" y="0.0" z="-63.0"/>
+                            <transformation a="0.0" b="0.0" c="-1.5707963267948966" x="0.0" y="0.0" z="-63.0"/>
                         </frame>
                     </frames>
                 </frame>
@@ -180,6 +180,6 @@
         <processData comment="Nombre de cycle" dataType="java.lang.Integer" defaultValue="5" displayName="Nombre_cycle" id="nbcycle" max="10.0" min="2.0" unit="cycle" value="5"/>
         <processData comment="Angle de deplacement de la jambe pendant la scéance" dataType="java.lang.Double" defaultValue="20" displayName="Debatement_angulaire" id="angle" max="40.0" min="5.0" unit="°" value="30"/>
         <processData comment="Vitesse de deplacement de la jambe pendant la scéance" dataType="java.lang.Double" defaultValue="20" displayName="Vitesse_angulaire" id="vitesse" max="40.0" min="5.0" unit="mm/s" value="30"/>
-        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom" id="name" value="PIERRE"/>
+        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom" id="name" value="xxxx"/>
     </processDataContainer>
 </RoboticsAPIData>
