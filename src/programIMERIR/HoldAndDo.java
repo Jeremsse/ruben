@@ -15,6 +15,7 @@ import com.kuka.roboticsAPI.geometricModel.CartDOF;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.Workpiece;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
+import com.kuka.roboticsAPI.motionModel.controlModeModel.JointImpedanceControlMode;
 import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 
 /**
@@ -39,13 +40,17 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	@Inject
 	private LBR robot;
 
-	CartesianImpedanceControlMode mode;
+	//CartesianImpedanceControlMode mode;
+	JointImpedanceControlMode mode;
 	
 	@Override
 	public void initialize() {
 
-		mode = new CartesianImpedanceControlMode();
-		mode.parametrize(CartDOF.ALL).setStiffness(100);
+		//mode = new CartesianImpedanceControlMode();
+		//mode.parametrize(CartDOF.ALL).setStiffness(100);
+		
+		mode = new JointImpedanceControlMode(100, 100, 100, 100, 100, 100, 100);
+		mode.setStiffness(100, 100, 100, 100, 100, 100, 100);
 	}
 
 	@Override
