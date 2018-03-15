@@ -162,6 +162,6 @@
         </workpieceTemplate>
     </objectTemplates>
     <processDataContainer>
-        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom" id="name" value="xxxx"/>
+        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom" id="name" value="Jack"/>
     </processDataContainer>
 </RoboticsAPIData>
