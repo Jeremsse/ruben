@@ -40,12 +40,12 @@ public class TrainingKnee extends RoboticsAPIApplication {
 	@Inject
 	@Named("Leg")
 	private Workpiece leg;
-	private int i;	
-	//var accessible via le processdata
-
-	private Integer   tempo, nbcycles;
-	private Double angle, anglespeed;
-	//create d'un int qui recupere le choix de l'utilisateur
+	private int i;
+	
+	//Variable accessible via les preocessData
+	private Integer tempo, nbCycle;
+	private Double angle, angleSpeed;
+	
 	private int answer;
 	
 	@Override
@@ -53,9 +53,11 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		// initialize your application here
 		legLift.attachTo(robot.getFlange());
 		tempo = getApplicationData().getProcessData("tempo").getValue();
-		nbcycles = getApplicationData().getProcessData("nbcycles").getValue();
+		nbCycle = getApplicationData().getProcessData("nbCycle").getValue();
 		angle = getApplicationData().getProcessData("angle").getValue();
-		anglespeed = getApplicationData().getProcessData("anglespeed").getValue();
+		angleSpeed = getApplicationData().getProcessData("angleSpeed").getValue();
+		
+		// Initialisation de answer : une valeur non utilisée par la boite de dialogue
 		answer = -1;
 	}
 
@@ -64,34 +66,29 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		// your application execution starts here
 		robot.move(ptpHome());
 		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
-		//initialiser answer avec le message
-		answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-													   "la jambe est en place?", "oui");
+		
+		// Initialisation de la variable answer
+		answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe du patient est-elle en place ?", "Oui");
 		
 		ThreadUtil.milliSleep(tempo);
-		// Ancrage de la jambe à l'outil
-		leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
-		for (i=1;i<nbcycles;i++){
-			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
-			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(anglespeed));
-		}
-		answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-				   "voulez vous refaire un cycle?", "oui", "non");
-		switch (answer) {
-		case 0:
-			for (i=1;i<nbcycles;i++){
-				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
-				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(anglespeed));
+		
+		do {
+			// Ancrage de la jambe à l'outil
+			leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
+			
+			for (i = 1; i < nbCycle; i++){
+				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(angleSpeed));
+				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(angleSpeed));
 			}
-			break;
-		case 1:
-			answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-					   "Avez vou enlever la jambe", "oui");
-			ThreadUtil.milliSleep(tempo);
-			leg.detach();
-		default:
-			break;
-		}			
+	
+			answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous continuer ?", "Oui", "Non");
+		} while (answer == 0);
+
+		answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe du patient est-elle enlevé ?", "Oui");
+		ThreadUtil.milliSleep(tempo);
+		leg.detach();
+		
 		robot.move(ptpHome().setJointVelocityRel(0.5));
+		
 	}
 }
