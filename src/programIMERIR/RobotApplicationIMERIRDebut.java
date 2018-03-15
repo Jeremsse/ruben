@@ -33,6 +33,7 @@ public class RobotApplicationIMERIRDebut extends RoboticsAPIApplication {
 	@Inject
 	@Named("LegLift")
 	private Tool legLift;//Création d'un objet outil
+	private int i;
 
 	@Override
 	public void initialize() {
@@ -43,20 +44,17 @@ public class RobotApplicationIMERIRDebut extends RoboticsAPIApplication {
 	
 	@Override
 	public void run() {
-		for (int i= 0;i<5;i++){
-			// your application execution starts here
-			robot.move(ptpHome());
-			legLift.getFrame("TCP").move(ptp(getApplicationData().getFrame("/Foam/P1")));
-			legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P5")));
-			legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P2")));
-			legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P6")));
-			legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P3")));
-			legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P4")));
-			legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P5")));
-			legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P3")));
-			legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P6")));
-			legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P1")));
-			robot.move(ptpHome());
+		// your application execution starts here
+		robot.move(ptpHome());
+		for (i=1;i < 7;i++){
+			if (i==1){
+				legLift.getFrame("TCP").move(ptp(getApplicationData().getFrame("/Foam/P"+i)));
+			}else{
+				legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P"+i)));
+			}
+			
 		}
+		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P1")));
+		robot.move(ptpHome());
 	}
 }
