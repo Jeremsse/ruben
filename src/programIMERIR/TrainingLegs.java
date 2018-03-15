@@ -50,7 +50,7 @@ public class TrainingLegs extends RoboticsAPIApplication {
 	//---------------------
 	private int answer;
 	
-	//private String nom;
+	private String nom;
 	/*
 	static enum name{
 		JACK,
@@ -61,26 +61,8 @@ public class TrainingLegs extends RoboticsAPIApplication {
 	
 	@Override
 	public void initialize() {
-		name = getApplicationData().getProcessData("personne").getValue();
-		if (name.equals("Jack")){
-			tempo = 10000;
-			nbcycle = 5;
-			angle = 30.0;
-			vitesse = 25.0;
-		}
+		nom = getApplicationData().getProcessData("name").getValue();
 		
-		if (name.equals("Pierre")){
-			tempo = 10000;
-			nbcycle = 10;
-			angle = 25.0;
-			vitesse = 35.0;
-		}
-		if (name.equals("Paul")){
-			tempo = 10000;
-			nbcycle = 7;
-			angle = 15.0;
-			vitesse = 40.0;
-		}
 			/*
 			getApplicationData().getProcessData("tempo").setValue(10000);
 			getApplicationData().getProcessData("nbcycle").setValue(5);
@@ -140,6 +122,27 @@ public class TrainingLegs extends RoboticsAPIApplication {
 
 	@Override
 	public void run() {
+		//choix nom
+		if (nom.equals("Jack")){
+			tempo = 10000;
+			nbcycle = 5;
+			angle = 30.0;
+			vitesse = 25.0;
+		}
+		
+		if (nom.equals("Pierre")){
+			tempo = 10000;
+			nbcycle = 10;
+			angle = 25.0;
+			vitesse = 35.0;
+		}
+		if (nom.equals("Paul")){
+			tempo = 10000;
+			nbcycle = 7;
+			angle = 15.0;
+			vitesse = 40.0;
+		}
+		
 		// your application execution starts here
 		robot.move(ptpHome().setJointVelocityRel(0.5));
 		legLift.getFrame("/Dummy/PNP_parent").move(ptp(getApplicationData().getFrame("/Genou/P1")));
