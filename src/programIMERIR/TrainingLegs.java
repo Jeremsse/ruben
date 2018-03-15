@@ -134,7 +134,7 @@ public class TrainingLegs extends RoboticsAPIApplication {
 			ThreadUtil.milliSleep(tempo);//10 sec pour détacher sa jambe
 			while(answer != 0){
 				ThreadUtil.milliSleep(5000);//détache la jambe
-				answer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe de "+nom+" est elle enlevé ?", "Oui","Non");
+				answer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe de "+nom+" est elle enlevée ?", "Oui","Non");
 			}
 			answer = -1;
 			leg.detach();//detache la jambe de l'outil en logiciel 
@@ -157,7 +157,7 @@ public class TrainingLegs extends RoboticsAPIApplication {
 			}
 			answer = -1;
 			leg1k5.getFrame("/PNP_enfant").attachTo(legLift.getFrame("/Dummy/PNP_parent"));
-			robot.setSafetyWorkpiece(leg1k5);
+			robot.setSafetyWorkpiece(leg1k5); //déclare en sécurité
 			while(answer !=1){
 				for(int i=0;i<nbcycle;i++){
 					leg1k5.getFrame("Genoux").move(linRel(0,0,0,Math.toRadians(-angle),0,0).setCartVelocity(vitesse));
@@ -169,10 +169,11 @@ public class TrainingLegs extends RoboticsAPIApplication {
 			ThreadUtil.milliSleep(tempo);//10 sec pour détacher sa jambe
 			while(answer != 0){
 				ThreadUtil.milliSleep(5000);//détache la jambe
-				answer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe de "+nom+" est elle enlevé ?", "Oui","Non");
+				answer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe de "+nom+" est elle enlevée ?", "Oui","Non");
 			}
 			answer = -1;
-			leg1k5.detach();//detache la jambe de l'outil en logiciel 
+			leg1k5.detach();//detache la jambe de l'outil en logiciel
+			//robot.setSafetyWorkpiece(null);
 			robot.move(ptpHome().setJointVelocityRel(0.5));
 	        break;
 	        
