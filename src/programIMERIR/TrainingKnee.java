@@ -64,7 +64,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		nom = getApplicationData().getProcessData("Nom").getValue();
 		answer = -1;
 		ctrlMode = new CartesianImpedanceControlMode();
-		ctrlMode.parametrize(CartDOF.X, CartDOF.Z).setStiffness(100);
+		ctrlMode.parametrize(CartDOF.X, CartDOF.Z).setStiffness(10);
 		ctrlMode.parametrize(CartDOF.Y).setStiffness(3000);
 		ctrlMode.parametrize(CartDOF.ALL).setDamping(0.7);
 	}
