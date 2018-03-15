@@ -1,4 +1,4 @@
-package programIMERIR;
+package application;
 
 
 import javax.inject.Inject;
@@ -10,7 +10,6 @@ import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.Workpiece;
-import com.kuka.roboticsAPI.persistenceModel.processDataModel.IProcessData;
 
 /**
  * Implementation of a robot application.
@@ -30,7 +29,7 @@ import com.kuka.roboticsAPI.persistenceModel.processDataModel.IProcessData;
  * @see #run()
  * @see #dispose()
  */
-public class TrainingKnee extends RoboticsAPIApplication {
+public class Trainning extends RoboticsAPIApplication {
 	@Inject
 	private LBR robot;
 	@Inject
@@ -39,35 +38,27 @@ public class TrainingKnee extends RoboticsAPIApplication {
 	@Inject
 	@Named("Leg")
 	private Workpiece leg;
-	private int i;	
-	//var accessible via le processdata
-
-	private Integer   tempo, nbcycles;
-	private Double angle, anglespeed;
+	//private int i;
 	@Override
 	public void initialize() {
 		// initialize your application here
-		legLift.attachTo(robot.getFlange());
-		tempo = getApplicationData().getProcessData("tempo").getValue();
-		nbcycles = getApplicationData().getProcessData("nbcycles").getValue();
-		angle = getApplicationData().getProcessData("angle").getValue();
-		anglespeed = getApplicationData().getProcessData("anglespeed").getValue();
+		legLift.attachTo(robot.getFlange());		
 	}
 
 	@Override
 	public void run() {
 		// your application execution starts here
 		robot.move(ptpHome());
-		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
-		ThreadUtil.milliSleep(tempo);
-		// Ancrage de la jambe à l'outil
-		leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
-		for (i=1;i<nbcycles;i++){
-			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
-			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(anglespeed));
+		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.4));
+		ThreadUtil.milliSleep(10000);//il attend 10s avant de remonter du P1.
+		//de la jambe a l'outil
+		leg.getFrame("/pnpchild").attachTo(legLift.getFrame("/dummy/pnpParentr"));
+		for (int i = 1; i < 5; i++) {
+			leg.getFrame("tcpknee").move(linRel(0, 0, 0,Math.toRadians(-20),0,0).setCartVelocity(30));
+			leg.getFrame("tcpknee").move(linRel(0, 0, 0,Math.toRadians(20),0,0).setCartVelocity(30));				
 		}
-		ThreadUtil.milliSleep(tempo);
-		leg.detach();
+		ThreadUtil.milliSleep(10000);//il attend 10s avant de remonter du P1.
+		leg.detach();//detache la bouteil du crochet
 		robot.move(ptpHome().setJointVelocityRel(0.5));
 	}
 }
