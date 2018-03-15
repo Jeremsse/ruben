@@ -58,7 +58,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		angle = getApplicationData().getProcessData("angle").getValue();
 		anglespeed = getApplicationData().getProcessData("anglespeed").getValue();
 		nom = getApplicationData().getProcessData("Nom").getValue();
-		answer = -1;
+		answer = 1;
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
 			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(anglespeed));
 		}
-		while(answer == -1){
+		while(answer != -1){
 		answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
 				   "voulez vous refaire un cycle Mr/Mme :"+nom+"?", "oui", "non");			
 		}
@@ -88,7 +88,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
 				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(anglespeed));
 			}
-			while(answer == -1){
+			while(answer != -1){
 				answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
 						   "voulez vous refaire un cycle?", "oui", "non");			
 				}
