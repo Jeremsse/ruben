@@ -173,7 +173,7 @@ public class TrainingLegs extends RoboticsAPIApplication {
 			}
 			answer = -1;
 			leg1k5.detach();//detache la jambe de l'outil en logiciel
-			//robot.setSafetyWorkpiece(null);
+			robot.setSafetyWorkpiece(null);
 			robot.move(ptpHome().setJointVelocityRel(0.5));
 	        break;
 	        
