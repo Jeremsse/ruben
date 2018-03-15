@@ -160,9 +160,9 @@
         </workpieceTemplate>
     </objectTemplates>
     <processDataContainer>
-        <processData dataType="java.lang.Integer" defaultValue="1000" displayName="temporisation" id="tempo" max="10000.0" min="1000.0" unit="ms" value="1000"/>
-        <processData dataType="java.lang.Integer" defaultValue="5" displayName="nombre de cycle" id="nbcycles" max="10.0" min="5.0" value="5"/>
-        <processData dataType="java.lang.Double" defaultValue="20" displayName="débatement angulaire" id="angle" max="30.0" min="5.0" unit="deg/s" value="20"/>
-        <processData dataType="java.lang.Double" defaultValue="5" displayName="vitesse angulaire" id="anglespeed" max="30.0" min="5.0" unit="mm/s" value="20"/>
+        <processData dataType="java.lang.Integer" defaultValue="1000" displayName="Temporisation" id="tempo" max="10000.0" min="1000.0" unit="ms" value="1000"/>
+        <processData dataType="java.lang.Integer" defaultValue="5" displayName="Nombre de cycles" id="nbCycles" max="10.0" min="5.0" value="5"/>
+        <processData dataType="java.lang.Double" defaultValue="20" displayName="Débattement angulaire" id="angle" max="30.0" min="5.0" unit="°" value="20"/>
+        <processData dataType="java.lang.Double" defaultValue="5" displayName="Vitesse angulaire" id="angleSpeed" max="30.0" min="5.0" unit="mm/s" value="20"/>
     </processDataContainer>
 </RoboticsAPIData>
