@@ -113,10 +113,20 @@
                 <info key="LastModificationTime" type="java.lang.Long" value="1521040834313"/>
             </additionalInformation>
             <frame id="_4cabcb63-ce38-4772-9230-004e97f4500d" name="P1">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <transformation a="2.364461471369817" b="-1.4051680606633437" c="-0.9234468260501867" x="-255.36644449646997" y="-816.1702563097253" z="349.99586088755524"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1521040838473"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521106673943"/>
+                    <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="LegLift/Dummy/PNP_parent" tool="LegLift" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
+                        <tcpTransformation a="0.0" b="0.0" c="0.0" x="-38.826061" y="-4.297067" z="174.296734"/>
+                    </info>
                 </additionalInformation>
+                <redundancyData>
+                    <redundancy transformationProviderName="KUKA_Sunrise_Cabinet_1/LBR_iiwa_14_R820_1" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="1" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="22" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-1.3901656575213084E-5" valueType="java.lang.Double"/>
+                    </redundancy>
+                </redundancyData>
             </frame>
         </frame>
     </world>
@@ -151,9 +161,7 @@
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="170.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.01"/>
         </workpieceTemplate>
     </objectTemplates>
-    
-   <processDataContainer>
-      <processData displayName="Nom" dataType="java.lang.String" defaultValue="0" id="name" value="xxxx"/>   
-   </processDataContainer>
-   
+    <processDataContainer>
+        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom" id="name" value="xxxx"/>
+    </processDataContainer>
 </RoboticsAPIData>
