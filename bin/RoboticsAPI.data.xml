@@ -143,7 +143,7 @@
                             <transformation a="-1.5707963267948966" b="0.0" c="0.0" x="0.0" y="0.0" z="-63.0"/>
                         </frame>
                         <frame id="_1929b6aa-0bff-42dd-aa7c-9ee72254d887" name="Knee">
-                            <transformation a="0.0" b="0.0" c="0.0" x="215.0" y="0.0" z="0.0"/>
+                            <transformation a="0.0" b="0.0" c="0.0" x="-215.0" y="0.0" z="0.0"/>
                         </frame>
                     </frames>
                 </frame>
