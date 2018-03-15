@@ -4,10 +4,13 @@ package programIMERIR;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kuka.common.ThreadUtil;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.Tool;
+import com.kuka.roboticsAPI.geometricModel.Workpiece;
+import com.kuka.roboticsAPI.persistenceModel.processDataModel.IProcessData;
 
 /**
  * Implementation of a robot application.
@@ -27,34 +30,44 @@ import com.kuka.roboticsAPI.geometricModel.Tool;
  * @see #run()
  * @see #dispose()
  */
-public class RobotApplicationIMERIRDebut extends RoboticsAPIApplication {
+public class TrainingKnee extends RoboticsAPIApplication {
 	@Inject
 	private LBR robot;
 	@Inject
 	@Named("LegLift")
 	private Tool legLift;//Création d'un objet outil
-	private int i;
+	@Inject
+	@Named("Leg")
+	private Workpiece leg;
+	private int i;	
+	//var accessible via le processdata
 
+	private Integer   tempo, nbcycles;
+	private Double angle, anglespeed;
 	@Override
 	public void initialize() {
 		// initialize your application here
-		legLift.attachTo(robot.getFlange());//"Fixation" de l'outil à la bride du robot.
+		legLift.attachTo(robot.getFlange());
+		tempo = getApplicationData().getProcessData("tempo").getValue();
+		nbcycles = getApplicationData().getProcessData("nbcycles").getValue();
+		angle = getApplicationData().getProcessData("angle").getValue();
+		anglespeed = getApplicationData().getProcessData("anglespeed").getValue();
 	}
 
-	
 	@Override
 	public void run() {
 		// your application execution starts here
 		robot.move(ptpHome());
-		for (i=1;i < 7;i++){
-			if (i==1){
-				legLift.getFrame("TCP").move(ptp(getApplicationData().getFrame("/Foam/P"+i)));
-			}else{
-				legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P"+i)));
-			}
-			
+		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
+		ThreadUtil.milliSleep(tempo);
+		// Ancrage de la jambe à l'outil
+		leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
+		for (i=1;i<nbcycles;i++){
+			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
+			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(anglespeed));
 		}
-		legLift.getFrame("TCP").move(lin(getApplicationData().getFrame("/Foam/P1")));
-		robot.move(ptpHome());
+		ThreadUtil.milliSleep(tempo);
+		leg.detach();
+		robot.move(ptpHome().setJointVelocityRel(0.5));
 	}
 }
