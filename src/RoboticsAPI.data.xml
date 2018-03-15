@@ -143,7 +143,6 @@
                             <transformation a="-1.5707963267948966" b="0.0" c="0.0" x="0.0" y="0.0" z="-63.0"/>
                             <additionalInformation>
                                 <info key="Radius" type="java.lang.Integer" value="50"/>
-                                <info key="SafetyID" type="java.lang.Integer" value="0"/>
                             </additionalInformation>
                         </frame>
                     </frames>
