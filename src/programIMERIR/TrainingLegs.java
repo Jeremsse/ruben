@@ -157,6 +157,7 @@ public class TrainingLegs extends RoboticsAPIApplication {
 			}
 			answer = -1;
 			leg1k5.getFrame("/PNP_enfant").attachTo(legLift.getFrame("/Dummy/PNP_parent"));
+			robot.setSafetyWorkpiece(leg1k5);
 			while(answer !=1){
 				for(int i=0;i<nbcycle;i++){
 					leg1k5.getFrame("Genoux").move(linRel(0,0,0,Math.toRadians(-angle),0,0).setCartVelocity(vitesse));
