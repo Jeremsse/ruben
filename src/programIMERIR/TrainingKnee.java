@@ -58,7 +58,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		angle = getApplicationData().getProcessData("angle").getValue();
 		anglespeed = getApplicationData().getProcessData("anglespeed").getValue();
 		nom = getApplicationData().getProcessData("Nom").getValue();
-		answer = 1;
+		answer = -1;
 	}
 
 	@Override
@@ -73,35 +73,21 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		ThreadUtil.milliSleep(tempo);
 		// Ancrage de la jambe à l'outil
 		leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
-		for (i=1;i<nbcycles;i++){
-			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
-			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(anglespeed));
-		}
-		while(answer != -1){
-		answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-				   "voulez vous refaire un cycle Mr/Mme :"+nom+"?", "oui", "non");			
-		}
-		answer = -1;
-		switch (answer) {
-		case 0:
+		
+		while(answer != 1){
 			for (i=1;i<nbcycles;i++){
 				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
 				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(anglespeed));
 			}
-			while(answer != -1){
-				answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-						   "voulez vous refaire un cycle?", "oui", "non");			
-				}
-				answer = -1;
-			break;
-		case 1:
+		answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
+				   "voulez vous refaire un cycle Mr/Mme :"+nom+"?", "oui", "non");			
+		}
+		answer = -1;
+		
 			answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
 					   "Avez vous enlever la jambe Mr/Mmme:"+nom+"?", "oui");
 			ThreadUtil.milliSleep(tempo);
-			leg.detach();
-		default:
-			break;
-		}			
+			leg.detach();			
 		robot.move(ptpHome().setJointVelocityRel(0.5));
 	}
 }
