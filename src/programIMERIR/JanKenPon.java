@@ -65,8 +65,8 @@ public class JanKenPon extends RoboticsAPIApplication {
 
 	public void moveArm(){
 		for(i=1;i<nbCycles;i++){
-			leg.getFrame("TCTKnee").move(linRel(0, 0, 0, Math.toRadians(-angle), 0, 0).setCartVelocity(angleSpeed));
-			leg.getFrame("TCTKnee").move(linRel(0, 0, 0, Math.toRadians(angle), 0, 0).setCartVelocity(angleSpeed));
+			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle), 0, 0).setCartVelocity(angleSpeed));
+			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle), 0, 0).setCartVelocity(angleSpeed));
 		}
 	}
 	
