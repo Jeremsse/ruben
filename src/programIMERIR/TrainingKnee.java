@@ -11,8 +11,6 @@ import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.Workpiece;
-import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
-import com.kuka.roboticsAPI.persistenceModel.processDataModel.IProcessData;
 import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 
 /**
@@ -42,59 +40,55 @@ public class TrainingKnee extends RoboticsAPIApplication {
 	@Inject
 	@Named("Leg")
 	private Workpiece leg;
-	private int i;	
-	//var accessible via le processdata
-
-	private Integer   tempo, nbcycles;
-	private Double angle, anglespeed;
-	private String nom;
-	//create d'un int qui recupere le choix de l'utilisateur
+	private int i;
+	// Variables accessibles via le ProcessData"
+	private Integer tempo,
+					nbCycles;
+	private Double angle,
+				   angleSpeed; 
+	//Création d'un entier qui récupère le choix de l'utilisateur
 	private int answer;
-	
-	private CartesianImpedanceControlMode ctrlMode;
+	private int cycle;
 	
 	@Override
 	public void initialize() {
 		// initialize your application here
 		legLift.attachTo(robot.getFlange());
-		tempo = getApplicationData().getProcessData("tempo").getValue();
-		nbcycles = getApplicationData().getProcessData("nbcycles").getValue();
-		angle = getApplicationData().getProcessData("angle").getValue();
-		anglespeed = getApplicationData().getProcessData("anglespeed").getValue();
-		nom = getApplicationData().getProcessData("Nom").getValue();
-		answer = -1;
-		ctrlMode = new CartesianImpedanceControlMode();
-		ctrlMode.parametrize(CartDOF.X, CartDOF.Z).setStiffness(10);
-		ctrlMode.parametrize(CartDOF.Y).setStiffness(3000);
-		ctrlMode.parametrize(CartDOF.ALL).setDamping(0.7);
+		tempo=getApplicationData().getProcessData("tempo").getValue();
+		nbCycles=getApplicationData().getProcessData("nbCycles").getValue();
+		angle=getApplicationData().getProcessData("angle").getValue();
+		angleSpeed=getApplicationData().getProcessData("angleSpeed").getValue();
+		//initialisation de answer à une valeur non utilisée par la boîte de dialogue
+		answer=-1;
+		cycle = -1;
 	}
 
 	@Override
 	public void run() {
 		// your application execution starts here
 		robot.move(ptpHome());
-		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5).setMode(ctrlMode));
-		
-		//initialiser answer avec le message
-		answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe est-elle en place ?", "oui");
-		
-		ThreadUtil.milliSleep(tempo);
-		// Ancrage de la jambe à l'outil
-		leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
-		
+		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
+		// initialisation de la variable answer avec le message
+
 		do {
-			for (i=1;i<nbcycles;i++){
-				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
-				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(anglespeed));
+			cycle = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous lancer un cycle?", "Oui", "Non");
+			
+			if(cycle == 0){
+				answer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe est elle en place?", "Oui");
+				ThreadUtil.milliSleep(tempo);
+				// Ancrage de la jambe à l'outil
+				leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
+				for (i = 1 ; i < nbCycles ; i++){
+					leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(angleSpeed));
+					leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(angleSpeed));
+				}
+				ThreadUtil.milliSleep(tempo);
 			}
-		answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-				   "Voulez vous refaire un cycle Mr/Mme :"+nom+"?", "oui", "non");			
-		} while (answer == 0);
+			
+		} while (cycle == 0);
 		
-			answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-					   "Avez vous enlever la jambe Mr/Mme:"+nom+"?", "oui");
-			ThreadUtil.milliSleep(tempo);
-			leg.detach();			
+		//fin
+		leg.detach();
 		robot.move(ptpHome().setJointVelocityRel(0.5));
 	}
 }
