@@ -145,6 +145,9 @@
                     </frames>
                 </frame>
             </frames>
+            <additionalInformation>
+                <info key="SafetyID" type="java.lang.Integer" value="0"/>
+            </additionalInformation>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.15"/>
         </toolTemplate>
         <workpieceTemplate class="" name="Leg">
