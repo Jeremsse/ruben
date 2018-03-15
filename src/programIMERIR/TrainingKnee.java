@@ -39,10 +39,19 @@ public class TrainingKnee extends RoboticsAPIApplication {
 	@Named("Leg")
 	private Workpiece leg;
 	private int i;
+	// Variables accessibles via le ProcessData"
+	private Integer tempo,
+					nbCycles;
+	private Double angle,
+				   angleSpeed; 	
 	@Override
 	public void initialize() {
 		// initialize your application here
 		legLift.attachTo(robot.getFlange());
+		tempo=getApplicationData().getProcessData("tempo").getValue();
+		nbCycles=getApplicationData().getProcessData("nbCycles").getValue();
+		angle=getApplicationData().getProcessData("angle").getValue();
+		angleSpeed=getApplicationData().getProcessData("angleSpeed").getValue();
 	}
 
 	@Override
@@ -50,18 +59,18 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		// your application execution starts here
 		robot.move(ptpHome());
 		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
-		ThreadUtil.milliSleep(10000);
+		ThreadUtil.milliSleep(tempo);
 		// Ancrage de la jambe à l'outil
 		leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
-		for (i=1;i<5;i++){
-			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-20),0, 0).setCartVelocity(30));
-			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(20),0, 0).setCartVelocity(30));
+		for (i=1;i<nbCycles;i++){
+			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(angleSpeed));
+			leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(angleSpeed));
 		}
-		ThreadUtil.milliSleep(10000);
+		ThreadUtil.milliSleep(tempo);
 		leg.detach();
 		robot.move(ptpHome().setJointVelocityRel(0.5));
 		
-		robot.move(ptpHome().setJointVelocityRel(0.5));
+		
 		
 	}
 }
