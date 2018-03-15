@@ -136,10 +136,10 @@
                 <frame id="_9ae17709-e023-4f4f-a076-7f864e49d0a4" name="TCP">
                     <transformation a="-0.2648909550439505" b="-0.9716926483625626" c="0.0" x="-38.8260612841462" y="-4.297067" z="237.29673441185474"/>
                 </frame>
-                <frame id="_07194ca3-2f55-4014-ac20-7cda23e00de8" name="dummy">
+                <frame id="_07194ca3-2f55-4014-ac20-7cda23e00de8" name="Dummy">
                     <transformation a="0.0" b="0.0" c="0.0" x="-38.826061" y="-4.297067" z="237.296734"/>
                     <frames>
-                        <frame id="_b4d711c0-78ec-4677-8495-fe4a0748dd3e" name="pnpParent">
+                        <frame id="_b4d711c0-78ec-4677-8495-fe4a0748dd3e" name="PNPParent">
                             <transformation a="-1.5707963267948966" b="0.0" c="0.0" x="0.0" y="0.0" z="-63.0"/>
                         </frame>
                     </frames>
@@ -152,7 +152,7 @@
         </toolTemplate>
         <workpieceTemplate class="" name="Leg">
             <frames>
-                <frame id="_dee5bdcc-734a-4028-9fab-4a2a8e16174a" name="PnpChild">
+                <frame id="_dee5bdcc-734a-4028-9fab-4a2a8e16174a" name="PNPChild">
                     <transformation a="0.0" b="0.0" c="0.0" x="125.0" y="0.0" z="0.0"/>
                 </frame>
                 <frame id="_d28021d5-9cce-4490-8214-a831dd31dcdc" name="TCPKnee">
@@ -163,7 +163,7 @@
         </workpieceTemplate>
         <workpieceTemplate class="" name="LegHeavy">
             <frames>
-                <frame id="_29ba2fc0-835c-4cbc-a1ae-dd73d8cd963f" name="PnpChild">
+                <frame id="_29ba2fc0-835c-4cbc-a1ae-dd73d8cd963f" name="PNPChild">
                     <transformation a="0.0" b="0.0" c="0.0" x="125.0" y="0.0" z="0.0"/>
                 </frame>
                 <frame id="_a1a3e595-faf7-4673-ba6c-5aa4cc41a98c" name="TCPKnee">
