@@ -55,7 +55,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 
 	@Override
 	public void run() {
-		robot.move(ptpHome());
+		//robot.move(ptpHome());
 		robot.move(positionHold(mode, -1, TimeUnit.SECONDS));
 		
 	}
