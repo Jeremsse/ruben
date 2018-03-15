@@ -141,9 +141,6 @@
                     <frames>
                         <frame id="_b4d711c0-78ec-4677-8495-fe4a0748dd3e" name="pnpParent">
                             <transformation a="-1.5707963267948966" b="0.0" c="0.0" x="0.0" y="0.0" z="-63.0"/>
-                            <additionalInformation>
-                                <info key="Radius" type="java.lang.Integer" value="50"/>
-                            </additionalInformation>
                         </frame>
                     </frames>
                 </frame>
@@ -166,20 +163,21 @@
         </workpieceTemplate>
         <workpieceTemplate class="" name="LegHeavy">
             <frames>
-                <frame id="_076a9a33-c7a2-4371-82dc-fbf23a6210de" name="PnpChild">
+                <frame id="_bd7be594-2e21-45f4-a87c-efcdf63da6ee" name="PnpChild">
                     <transformation a="0.0" b="0.0" c="0.0" x="125.0" y="0.0" z="0.0"/>
                 </frame>
-                <frame id="_8a70fe0b-90b0-4a48-9a1d-ab6cc5b19f40" name="TCPKnee">
+                <frame id="_5b07aad2-3b7d-4cc8-8339-1ef87972648d" name="TCPKnee">
                     <transformation a="0.0" b="0.0" c="0.0" x="340.0" y="0.0" z="0.0"/>
                 </frame>
             </frames>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="170.0" cogY="0.0" cogZ="0.0" inertiaX="0.0060" inertiaY="0.0608" inertiaZ="0.0608" mass="1.5"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="170.0" cogY="0.0" cogZ="0.0" inertiaX="0.06" inertiaY="0.0608" inertiaZ="0.608" mass="1.5"/>
         </workpieceTemplate>
     </objectTemplates>
     <processDataContainer>
-        <processData dataType="java.lang.Integer" defaultValue="1000" displayName="Temporisation" id="tempo" max="10000.0" min="1000.0" unit="ms" value="1000"/>
-        <processData dataType="java.lang.Integer" defaultValue="5" displayName="Nombre de cycles" id="nbCycles" max="10.0" min="5.0" value="5"/>
-        <processData dataType="java.lang.Double" defaultValue="20" displayName="Débattement angulaire" id="angle" max="30.0" min="5.0" unit="°" value="20"/>
-        <processData dataType="java.lang.Double" defaultValue="5" displayName="Vitesse angulaire" id="angleSpeed" max="30.0" min="5.0" unit="mm/s" value="20"/>
+        <processData dataType="java.lang.Integer" defaultValue="1000" displayName="temporisation" id="tempo" max="10000.0" min="1000.0" unit="ms" value="1000"/>
+        <processData dataType="java.lang.Integer" defaultValue="5" displayName="nombre de cycle" id="nbcycles" max="10.0" min="5.0" value="5"/>
+        <processData dataType="java.lang.Double" defaultValue="20" displayName="débatement angulaire" id="angle" max="30.0" min="5.0" unit="deg/s" value="20"/>
+        <processData dataType="java.lang.Double" defaultValue="5" displayName="vitesse angulaire" id="anglespeed" max="30.0" min="5.0" unit="mm/s" value="20"/>
+        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom du patient" id="Nom" value=""/>
     </processDataContainer>
 </RoboticsAPIData>
