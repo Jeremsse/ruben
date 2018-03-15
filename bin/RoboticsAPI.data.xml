@@ -141,9 +141,11 @@
                     <frames>
                         <frame id="_b4d711c0-78ec-4677-8495-fe4a0748dd3e" name="pnpParent">
                             <transformation a="-1.5707963267948966" b="0.0" c="0.0" x="0.0" y="0.0" z="-63.0"/>
-                        </frame>
-                        <frame id="_1929b6aa-0bff-42dd-aa7c-9ee72254d887" name="Knee">
-                            <transformation a="0.0" b="0.0" c="0.0" x="-215.0" y="0.0" z="0.0"/>
+                            <frames>
+                                <frame id="_65522ec2-8b06-4636-9efe-5ec9caa032cf" name="Knee">
+                                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="215.0" z="0.0"/>
+                                </frame>
+                            </frames>
                         </frame>
                     </frames>
                 </frame>
