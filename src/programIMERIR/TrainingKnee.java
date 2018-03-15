@@ -74,7 +74,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		ThreadUtil.milliSleep(tempo);
 		// Ancrage de la jambe à l'outil
 		leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
-		robot.setSafetyWorkpiece(leg);
+		
 		while(answer != 1){
 			for (i=1;i<nbcycles;i++){
 				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(anglespeed));
@@ -88,8 +88,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 			answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
 					   "Avez vous enlever la jambe Mr/Mmme:"+nom+"?", "oui");
 			ThreadUtil.milliSleep(tempo);
-			leg.detach();	
-			robot.setSafetyWorkpiece(null);
+			leg.detach();			
 		robot.move(ptpHome().setJointVelocityRel(0.5));
 	}
 }
