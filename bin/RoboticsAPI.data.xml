@@ -141,11 +141,6 @@
                     <frames>
                         <frame id="_b4d711c0-78ec-4677-8495-fe4a0748dd3e" name="pnpParent">
                             <transformation a="-1.5707963267948966" b="0.0" c="0.0" x="0.0" y="0.0" z="-63.0"/>
-                            <frames>
-                                <frame id="_65522ec2-8b06-4636-9efe-5ec9caa032cf" name="Knee">
-                                    <transformation a="0.0" b="0.0" c="0.0" x="215.0" y="0.0" z="0.0"/>
-                                </frame>
-                            </frames>
                         </frame>
                     </frames>
                 </frame>
@@ -167,7 +162,7 @@
     <processDataContainer>
         <processData dataType="java.lang.Integer" defaultValue="1000" displayName="Temporisation" id="tempo" max="10000.0" min="1000.0" unit="ms" value="1000"/>
         <processData dataType="java.lang.Integer" defaultValue="5" displayName="Nombre de cycles" id="nbCycles" max="10.0" min="5.0" value="5"/>
-        <processData dataType="java.lang.Double" defaultValue="20" displayName="Débattement angulaire" id="angle" max="360.0" min="5.0" unit="°" value="50"/>
-        <processData dataType="java.lang.Double" defaultValue="5" displayName="Vitesse angulaire" id="angleSpeed" max="30.0" min="1.0" unit="mm/s" value="30"/>
+        <processData dataType="java.lang.Double" defaultValue="20" displayName="Débattement angulaire" id="angle" max="30.0" min="5.0" unit="°" value="20"/>
+        <processData dataType="java.lang.Double" defaultValue="5" displayName="Vitesse angulaire" id="angleSpeed" max="30.0" min="5.0" unit="mm/s" value="20"/>
     </processDataContainer>
 </RoboticsAPIData>

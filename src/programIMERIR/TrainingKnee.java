@@ -47,6 +47,8 @@ public class TrainingKnee extends RoboticsAPIApplication {
 				   angleSpeed; 
 	//Création d'un entier qui récupère le choix de l'utilisateur
 	private int answer;
+	private int cycle;
+	
 	@Override
 	public void initialize() {
 		// initialize your application here
@@ -57,6 +59,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		angleSpeed=getApplicationData().getProcessData("angleSpeed").getValue();
 		//initialisation de answer à une valeur non utilisée par la boîte de dialogue
 		answer=-1;
+		cycle = -1;
 	}
 
 	@Override
@@ -65,22 +68,23 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		robot.move(ptpHome());
 		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
 		// initialisation de la variable answer avec le message
-		answer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe est elle en place ?", "Oui","Annuler");
-		ThreadUtil.milliSleep(tempo);
-		// Ancrage de la jambe à l'outil
-		leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
-		while(answer==0){
+
+		do {
+			cycle = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous lancer un cycle?", "Oui", "Non");
+			
+			answer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe est elle en place?", "Oui");
+			ThreadUtil.milliSleep(tempo);
+			// Ancrage de la jambe à l'outil
+			leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
 			for (i=1;i<nbCycles;i++){
 				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(angleSpeed));
 				leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(angleSpeed));
 			}
-			answer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Répéter le cycle ?", "Oui","Non");
-		}
-		ThreadUtil.milliSleep(tempo);
+			ThreadUtil.milliSleep(tempo);
+		} while (cycle == 0);
+		
+		//fin
 		leg.detach();
 		robot.move(ptpHome().setJointVelocityRel(0.5));
-		
-		
-		
 	}
 }
