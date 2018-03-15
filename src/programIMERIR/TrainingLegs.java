@@ -145,7 +145,7 @@ public class TrainingLegs extends RoboticsAPIApplication {
 		
 		// your application execution starts here
 		robot.move(ptpHome().setJointVelocityRel(0.5));
-		legLift.getFrame("/Dummy/PNP_parent").move(ptp(getApplicationData().getFrame("/Genou/P1")));
+		legLift.getFrame("/Dummy/PNP_parent").move(ptp(getApplicationData().getFrame("/Genoux/P1")));
 		//message variable answeranswer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe du patient est elle en place ?", "Oui","Non");
 		while(answer != 0){
 			ThreadUtil.milliSleep(5000);//attache la jambe
