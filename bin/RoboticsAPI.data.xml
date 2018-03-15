@@ -161,7 +161,9 @@
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="170.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.01"/>
         </workpieceTemplate>
     </objectTemplates>
+    
     <processDataContainer>
-        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom" id="name" value="Jack"/>
+        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom" id="name" value="xxxx"/>
     </processDataContainer>
+    
 </RoboticsAPIData>

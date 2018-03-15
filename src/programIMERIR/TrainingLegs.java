@@ -61,6 +61,7 @@ public class TrainingLegs extends RoboticsAPIApplication {
 	
 	@Override
 	public void initialize() {
+		legLift.attachTo(robot.getFlange());//"Fixation" de l'outil à la bride du robot.
 		nom = getApplicationData().getProcessData("name").getValue();
 		
 			/*
