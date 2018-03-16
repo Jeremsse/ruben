@@ -10,6 +10,7 @@ import com.kuka.common.ThreadUtil;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 
+import com.kuka.roboticsAPI.deviceModel.JointPosition;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
 import com.kuka.roboticsAPI.geometricModel.Tool;
@@ -41,27 +42,25 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	@Inject
 	private LBR robot;
 
-	//CartesianImpedanceControlMode mode;
-	//JointImpedanceControlMode mode;
-	PositionControlMode mode;
+	CartesianImpedanceControlMode mode;
+//	JointImpedanceControlMode mode;
 	
 	@Override
 	public void initialize() {
 
-		//mode = new CartesianImpedanceControlMode();
-		//mode.parametrize(CartDOF.ALL).setStiffness(100);
+		mode = new CartesianImpedanceControlMode();
+		mode.parametrize(CartDOF.TRANSL).setStiffness(100);
+		mode.parametrize(CartDOF.ROT).setStiffness(10);
 		
 //		mode = new JointImpedanceControlMode(100, 100, 100, 100, 100, 10, 100);
-//		mode.setStiffness(100, 100, 100, 100, 100, 10, 100);
-		
-		mode = new PositionControlMode();
-		mode.setMaxJointSpeed(Math.toRadians(45));
+//		mode.setStiffness(100, 100, 100, 10, 10, 10, 10);
 	}
 
 	@Override
 	public void run() {
 		//robot.move(ptpHome());
 		robot.move(positionHold(mode, -1, TimeUnit.SECONDS));
+		
 		
 	}
 }
