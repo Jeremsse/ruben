@@ -79,6 +79,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 					registerPositionKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 
 					//TODO make the position registering function (clement)
+					registerPosition();
 
 					registerPositionKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 				}
@@ -156,11 +157,24 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	 * Make the robot polish the area between the 4 points
 	 */
 	private void polish(){
+		getLogger().info("Ponçage...");
+		
 		polishKey.setText(UserKeyAlignment.MiddleLeft, "Ponçage...");
 		polishKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Green, UserKeyLEDSize.Small);
 
 		//TODO make the polishing function
 
 		polishKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
+		
+		getLogger().info("Ponçage terminé.");
+	}
+	
+	/**
+	 * Register the current state as a position.
+	 */
+	private void registerPosition(){
+		getLogger().info("Enregistrement de la position...");
+		
+		getLogger().info("Enregistrement de la position terminé");
 	}
 }
