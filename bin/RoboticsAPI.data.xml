@@ -178,6 +178,6 @@
         <processData dataType="java.lang.Integer" defaultValue="5" displayName="nombre de cycle" id="nbcycles" max="10.0" min="5.0" value="5"/>
         <processData dataType="java.lang.Double" defaultValue="20" displayName="débatement angulaire" id="angle" max="30.0" min="5.0" unit="deg/s" value="20"/>
         <processData dataType="java.lang.Double" defaultValue="5" displayName="vitesse angulaire" id="anglespeed" max="30.0" min="5.0" unit="mm/s" value="20"/>
-        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom du patient" id="Nom" value="ouza"/>
+        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom du patient" id="Nom" value=""/>
     </processDataContainer>
 </RoboticsAPIData>

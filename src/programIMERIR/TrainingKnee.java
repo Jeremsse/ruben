@@ -51,7 +51,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 	private String URL = "localhost"; 
 	private String login = "root"; 
 	private String password = ""; 
-	
+	private String sql ;
 	@Override
 	public void initialize() {
 		// initialize your application here
@@ -61,35 +61,32 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		angle = getApplicationData().getProcessData("angle").getValue();
 		anglespeed = getApplicationData().getProcessData("anglespeed").getValue();
 		nom = getApplicationData().getProcessData("Nom").getValue();
-		answer = -1;
-					
-			//se connecter a la base de données
-			try{ 
-			Connection connection = DriverManager.getConnection(URL,login,password);
-			  //interaction avec la base 
-			Statement st = connection.createStatement();
-			String sql = ("SELECT Prenom FROM infos_patients WHERE `Nom` = '$nom'");
-			ResultSet rs = st.executeQuery(sql);
-			if(rs.next()) { 
-			 int id = rs.getInt("first_column_name"); 
-			 String str1 = rs.getString("second_column_name");
-			 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-					   "bonjour mm"+nom+sql, "Ok");		
-
-			}
-
-			connection.close();
-			} 
-			catch(SQLException sqle){ 
-			   //cf. Comment gérer les erreurs ?  
-			} 
-			finally{ 
-			   //cf. Comment bien fermer une connexion ? 
-			        }
+		answer = -1;				
 	}
 
 	@Override
 	public void run() {
+		//se connecter a la base de données
+		try{ 
+		Connection connection = DriverManager.getConnection(URL,login,password);
+		  //interaction avec la base 
+		Statement st = connection.createStatement();
+		sql = ("SELECT Prenom FROM infos_patients WHERE `Nom` = '$nom'");
+		ResultSet rs = st.executeQuery(sql);
+		if(rs.next()) { 
+		 int id = rs.getInt("first_column_name"); 
+		 String str1 = rs.getString("second_column_name");
+		 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
+				   "bonjour mm"+nom+sql, "Ok");		
+		}
+		connection.close();
+		} 
+		catch(SQLException sqle){ 
+		   //cf. Comment gérer les erreurs ?  
+		} 
+		finally{ 
+		   //cf. Comment bien fermer une connexion ? 
+		        }
 		// your application execution starts here
 		robot.move(ptpHome());
 		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
