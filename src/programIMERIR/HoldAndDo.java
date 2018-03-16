@@ -44,8 +44,8 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	@Inject
 	private LBR robot;
 
-	CartesianImpedanceControlMode mode;
-//	JointImpedanceControlMode mode;
+//	CartesianImpedanceControlMode mode;
+	JointImpedanceControlMode mode;
 	
 	int onPosition = -1;
 	double[] jointPosition;
@@ -54,12 +54,12 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	public void initialize() {
 		onPosition = -1;
 
-		mode = new CartesianImpedanceControlMode();
-		mode.parametrize(CartDOF.TRANSL).setStiffness(100);
-		mode.parametrize(CartDOF.ROT).setStiffness(10);
+//		mode = new CartesianImpedanceControlMode();
+//		mode.parametrize(CartDOF.TRANSL).setStiffness(100);
+//		mode.parametrize(CartDOF.ROT).setStiffness(10);
 
-//		mode = new JointImpedanceControlMode(100, 100, 100, 100, 100, 10, 100);
-//		mode.setStiffness(100, 100, 100, 10, 10, 10, 10);
+		mode = new JointImpedanceControlMode(100, 100, 100, 100, 100, 10, 100);
+		mode.setStiffness(100, 100, 100, 10, 10, 10, 10);
 	}
 
 	@Override
