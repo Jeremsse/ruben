@@ -70,8 +70,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 			@Override
 			public void onKeyEvent(IUserKey key, UserKeyEvent event) {
 				moving = !moving;
-				
-				key.setLED(UserKeyAlignment.MiddleLeft, moving ? UserKeyLED.Green : UserKeyLED.Red, UserKeyLEDSize.Small);
+				//key.setLED(UserKeyAlignment.MiddleLeft, moving ? UserKeyLED.Green : UserKeyLED.Red, UserKeyLEDSize.Small);
 			}
 		};
 		
@@ -92,12 +91,15 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		//onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous positionner le robot?", "Oui", "Non");
 		while(!finished){
 			if(moving){
+				key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Green, UserKeyLEDSize.Small);
+				
 				robot.move(positionHold(mode, 5, TimeUnit.SECONDS));
 				
 				jointPosition = robot.getCurrentJointPosition().get();
 				
 				robot.move(ptp(jointPosition));
-				//onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous positionner le robot?", "Oui", "Non");				
+				
+				key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 			}
 		}
 
