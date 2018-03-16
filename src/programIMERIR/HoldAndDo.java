@@ -58,8 +58,8 @@ public class HoldAndDo extends RoboticsAPIApplication {
 //		mode.parametrize(CartDOF.TRANSL).setStiffness(100);
 //		mode.parametrize(CartDOF.ROT).setStiffness(10);
 
-		mode = new JointImpedanceControlMode(100, 100, 100, 100, 100, 10, 100);
-		mode.setStiffness(100, 100, 100, 10, 10, 10, 10);
+		mode = new JointImpedanceControlMode();
+		mode.setStiffness(10, 10, 10, 10, 10, 10, 10);
 	}
 
 	@Override
