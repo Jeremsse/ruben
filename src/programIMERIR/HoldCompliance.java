@@ -53,6 +53,7 @@ public class HoldCompliance extends RoboticsAPIApplication {
 	private ForceCondition grabForce;
 	private ConditionObserver grabForceObserver;
 	private ForceSensorData data;
+	private boolean moving = false;
 
 	private ICallbackAction triggerFreeMove = new ICallbackAction() {
 		
@@ -75,6 +76,7 @@ public class HoldCompliance extends RoboticsAPIApplication {
 			getLogger().info("evaluate grabForce= " + getObserverManager().evaluate(grabForce));
 			getLogger().info("forces : " + force.getX() + " , " + force.getY() + " , " + force.getZ());
 			robot.move(ptp(getApplicationData().getFrame("/Foam/P1")));
+			freeMovementRobot();
 		}
 	};
 	
@@ -94,6 +96,7 @@ public class HoldCompliance extends RoboticsAPIApplication {
 		
 		robot.move(ptp(getApplicationData().getFrame("/WorkingTable/WaitingPoint")));
 		grabForceObserver.enable();
+		//getObserverManager().waitFor(grabForce);
 		while(true){
 			data = robot.getExternalForceTorque(robot.getFlange());
 			Vector force = data.getForce();
@@ -101,9 +104,15 @@ public class HoldCompliance extends RoboticsAPIApplication {
 			getLogger().info("forces : " + force.getX() + " , " + force.getY() + " , " + force.getZ());
 			ThreadUtil.milliSleep(1000);
 		}
-			//getObserverManager().waitFor(grabForce);
+			
 		
 		//lBR_iiwa_14_R820_1.move(positionHold(mode, -1, TimeUnit.SECONDS));
 		//getLogger().info("Fin de l'application");
+	}
+	
+	public void freeMovementRobot(){
+		while(moving){
+			robot.move(positionHold(mode,1, TimeUnit.SECONDS));
+		}
 	}
 }
