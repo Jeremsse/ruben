@@ -129,6 +129,37 @@
                 </redundancyData>
             </frame>
         </frame>
+        <frame id="_b5604481-4ace-4755-ba60-43501c8034b7" name="WorkingTable">
+            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+            <additionalInformation>
+                <info key="LastModificationTime" type="java.lang.Long" value="1521214024518"/>
+                <info key="UseAsBaseForJogging" type="java.lang.Boolean" value="true"/>
+            </additionalInformation>
+            <frame id="_e5e30359-8b6a-4b14-8530-145294a67e9b" name="StartingPoint">
+                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <additionalInformation>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521197804297"/>
+                    <info key="Comment" type="java.lang.String" value="Point d'origine de la forme."/>
+                </additionalInformation>
+            </frame>
+            <frame id="_42c650d7-1839-4d27-97b1-1d4327f948e1" name="WaitingPoint">
+                <transformation a="-3.1332357603506527" b="0.004671138378644187" c="3.141551187525913" x="484.14624579166025" y="4.322048731202074" z="166.60902675135367"/>
+                <additionalInformation>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521215021183"/>
+                    <info key="Comment" type="java.lang.String" value="Point où le cobot attend d'être positionné par l'opérateur."/>
+                    <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="Flange" tool="Flange" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
+                        <tcpTransformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                    </info>
+                </additionalInformation>
+                <redundancyData>
+                    <redundancy transformationProviderName="KUKA_Sunrise_Cabinet_1/LBR_iiwa_14_R820_1" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="2" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="13" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-7.406250139298813E-5" valueType="java.lang.Double"/>
+                    </redundancy>
+                </redundancyData>
+            </frame>
+        </frame>
     </world>
     <objectTemplates>
         <toolTemplate class="" name="LegLift">
@@ -158,11 +189,20 @@
             </frames>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="170.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.01"/>
         </workpieceTemplate>
+        <toolTemplate class="" name="Pen">
+            <frames>
+                <frame id="_3956ac0a-cc2c-4cbc-92bf-1f4930064e1d" name="PenTCP">
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                </frame>
+            </frames>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
+        </toolTemplate>
     </objectTemplates>
     <processDataContainer>
         <processData dataType="java.lang.Integer" defaultValue="1000" displayName="Temporisation" id="tempo" max="10000.0" min="1000.0" unit="ms" value="1000"/>
         <processData dataType="java.lang.Integer" defaultValue="5" displayName="Nombre de cycles" id="nbCycles" max="10.0" min="5.0" value="5"/>
         <processData dataType="java.lang.Double" defaultValue="20" displayName="Débattement angulaire" id="angle" max="30.0" min="5.0" unit="°" value="20"/>
         <processData dataType="java.lang.Double" defaultValue="5" displayName="Vitesse angulaire" id="angleSpeed" max="30.0" min="5.0" unit="mm/s" value="20"/>
+        <processData dataType="java.lang.Double" defaultValue="5" displayName="Dimension du Carré" id="squareSize" max="300.0" min="5.0" unit="cm" value="10"/>
     </processDataContainer>
 </RoboticsAPIData>
