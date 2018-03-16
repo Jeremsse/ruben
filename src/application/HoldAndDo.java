@@ -69,7 +69,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		allowMovementKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 		
 		//Button allowing the user to stop the application
-		stopApplicationKey = buttonBar.addUserKey(0, stopApplicationButtonListener, true);
+		stopApplicationKey = buttonBar.addUserKey(1, stopApplicationButtonListener, true);
 		stopApplicationKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 		
 		//Make the buttons bar visible
