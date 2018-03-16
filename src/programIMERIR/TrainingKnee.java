@@ -73,6 +73,9 @@ public class TrainingKnee extends RoboticsAPIApplication {
 			if(rs.next()) { 
 			 int id = rs.getInt("first_column_name"); 
 			 String str1 = rs.getString("second_column_name");
+			 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
+					   "bonjour mm"+nom+sql, "Ok");		
+
 			}
 
 			connection.close();
