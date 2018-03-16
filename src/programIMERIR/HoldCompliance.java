@@ -41,7 +41,8 @@ public class HoldCompliance extends RoboticsAPIApplication {
 	public void initialize() {
 		// initialize your application here
 		mode = new CartesianImpedanceControlMode();
-		mode.parametrize(CartDOF.ALL).setStiffness(500);
+		mode.parametrize(CartDOF.X,CartDOF.Y,CartDOF.Z).setStiffness(100);
+		mode.parametrize(CartDOF.A,CartDOF.B,CartDOF.C).setStiffness(10);
 	}
 
 	@Override
