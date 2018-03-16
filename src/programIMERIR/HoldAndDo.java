@@ -68,9 +68,11 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		IUserKeyListener listener = new IUserKeyListener() {
 			@Override
 			public void onKeyEvent(IUserKey key, UserKeyEvent event) {
-				moving = !moving;
-				getLogger().info(String.valueOf(moving));
-				//key.setLED(UserKeyAlignment.MiddleLeft, moving ? UserKeyLED.Green : UserKeyLED.Red, UserKeyLEDSize.Small);
+				if(event.equals(UserKeyEvent.KeyUp)){
+					moving = !moving;
+					getLogger().info(String.valueOf(moving));
+					//key.setLED(UserKeyAlignment.MiddleLeft, moving ? UserKeyLED.Green : UserKeyLED.Red, UserKeyLEDSize.Small);					
+				}
 			}
 		};
 		
