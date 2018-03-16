@@ -107,5 +107,6 @@ public class HoldAndDo extends RoboticsAPIApplication {
 			robot.move(ptp(jointPosition));
 			//onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous positionner le robot?", "Oui", "Non");
 		}
+		run();
 	}
 }
