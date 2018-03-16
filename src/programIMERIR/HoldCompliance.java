@@ -42,7 +42,7 @@ import com.kuka.roboticsAPI.conditionModel.*;
  */
 public class HoldCompliance extends RoboticsAPIApplication {
 	@Inject
-	private LBR lBR_iiwa_14_R820_1;
+	private LBR robot;
 	
 	@Inject
 	private CartesianImpedanceControlMode mode;
@@ -65,7 +65,7 @@ public class HoldCompliance extends RoboticsAPIApplication {
 				int missedEvents) {
 			// TODO Auto-generated method stub
 			getLogger().info("Action triggered");
-			lBR_iiwa_14_R820_1.move(ptp(getApplicationData().getFrame("/Foam/P1")));
+			//lBR_iiwa_14_R820_1.move(ptp(getApplicationData().getFrame("/Foam/P1")));
 		}
 	};
 	
@@ -75,18 +75,21 @@ public class HoldCompliance extends RoboticsAPIApplication {
 		mode = new CartesianImpedanceControlMode();
 		mode.parametrize(CartDOF.X,CartDOF.Y,CartDOF.Z).setStiffness(10);
 		mode.parametrize(CartDOF.A,CartDOF.B,CartDOF.C).setStiffness(5);
-		grabForce = ForceCondition.createSpatialForceCondition(lBR_iiwa_14_R820_1.getFlange(), 20);
-		grabForceObserver = getObserverManager().createConditionObserver(grabForce, NotificationType.All,grabForceListener);
+		grabForce = ForceCondition.createSpatialForceCondition(robot.getFlange(), 5);
+		grabForceObserver = getObserverManager().createConditionObserver(grabForce, NotificationType.EdgesOnly,grabForceListener);
 	}
 
 	@Override
 	public void run() {
 		// your application execution starts here
-		lBR_iiwa_14_R820_1.move(ptpHome());
+		robot.move(ptpHome());
 		grabForceObserver.enable();
-		getObserverManager().waitFor(grabForce);
+		while(true){
+			getLogger().info("evaluate grabForce= " + getObserverManager().evaluate(grabForce));
+		}
+			//getObserverManager().waitFor(grabForce);
 		
 		//lBR_iiwa_14_R820_1.move(positionHold(mode, -1, TimeUnit.SECONDS));
-		getLogger().info("Fin de l'application");
+		//getLogger().info("Fin de l'application");
 	}
 }
