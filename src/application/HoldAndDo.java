@@ -37,7 +37,6 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	private IUserKey stopApplicationKey;
 
 	private boolean moving = false;
-	private boolean polishing = false;
 	private boolean finished = false;
 	
 	@Override
