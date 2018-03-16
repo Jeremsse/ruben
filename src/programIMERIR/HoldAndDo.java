@@ -43,10 +43,8 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	@Inject
 	private LBR robot;
 
-//	CartesianImpedanceControlMode mode;
 	JointImpedanceControlMode mode;
 	
-	int onPosition = -1;
 	double[] jointPosition;
 	
 	private boolean moving = false;
@@ -56,14 +54,8 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	
 	@Override
 	public void initialize() {
-		onPosition = -1;
-
-//		mode = new CartesianImpedanceControlMode();
-//		mode.parametrize(CartDOF.TRANSL).setStiffness(100);
-//		mode.parametrize(CartDOF.ROT).setStiffness(10);
-
-		mode = new JointImpedanceControlMode(10, 10, 10, 10, 10, 5, 1);
-		mode.setStiffness(10, 10, 10, 10, 10, 5, 1);
+		mode = new JointImpedanceControlMode(10, 10, 10, 10, 10, 10, 1);
+		mode.setStiffness(10, 10, 10, 10, 10, 10, 1);
 		
 		IUserKeyListener listener = new IUserKeyListener() {
 			@Override
@@ -80,8 +72,8 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		key = buttonBar.addUserKey(0, listener, true);
 		key.setText(UserKeyAlignment.MiddleLeft, "Bouger le robot");
 		key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
-		//key.setCriticalText("Critical problem?");
 		
+		buttonBar.publish();
 		buttonBar.publish();
 	}
 
