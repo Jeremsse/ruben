@@ -24,6 +24,7 @@ import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKey;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyBar;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyListener;
+import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyAlignment;
 import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyEvent;
 
 /**
@@ -71,12 +72,26 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		IUserKeyListener listener = new IUserKeyListener() {
 			@Override
 			public void onKeyEvent(IUserKey key, UserKeyEvent event) {
-				moving = !moving;
+				moving = true;
+			}
+		};
+		
+		IUserKeyListener listener2 = new IUserKeyListener() {
+			@Override
+			public void onKeyEvent(IUserKey key, UserKeyEvent event) {
+				moving = false;
 			}
 		};
 		
 		buttonBar = getApplicationUI().createUserKeyBar("Moving");
-		IUserKey openKey = buttonBar.addUserKey(0,listener,true);
+		
+		IUserKey key = buttonBar.addUserKey(0, listener, true);
+		key.setText(UserKeyAlignment.MiddleLeft, "Bouger le robot");
+		
+		IUserKey key2 = buttonBar.addUserKey(1, listener2, true);
+		key2.setText(UserKeyAlignment.MiddleLeft, "Arreter le robot");
+		
+		buttonBar.publish();
 	}
 
 	@Override
