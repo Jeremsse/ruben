@@ -88,7 +88,7 @@ public class HoldCompliance extends RoboticsAPIApplication {
 		// your application execution starts here
 		ForceSensorData data;
 		
-		robot.move(ptpHome());
+		robot.move(ptp(getApplicationData().getFrame("/WorkingTable/WaitingPoint")));
 		grabForceObserver.enable();
 		while(true){
 			data = robot.getExternalForceTorque(robot.getFlange());
