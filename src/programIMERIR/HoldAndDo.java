@@ -80,7 +80,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		key = buttonBar.addUserKey(0, listener, true);
 		key.setText(UserKeyAlignment.MiddleLeft, "Bouger le robot");
 		key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
-		key.setCriticalText("Critical problem?");
+		//key.setCriticalText("Critical problem?");
 		
 		buttonBar.publish();
 	}
