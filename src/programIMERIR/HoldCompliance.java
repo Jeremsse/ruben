@@ -75,7 +75,7 @@ public class HoldCompliance extends RoboticsAPIApplication {
 		mode = new CartesianImpedanceControlMode();
 		mode.parametrize(CartDOF.X,CartDOF.Y,CartDOF.Z).setStiffness(10);
 		mode.parametrize(CartDOF.A,CartDOF.B,CartDOF.C).setStiffness(5);
-		grabForce = ForceCondition.createSpatialForceCondition(lBR_iiwa_14_R820_1.getFlange(), 5);
+		grabForce = ForceCondition.createSpatialForceCondition(lBR_iiwa_14_R820_1.getFlange(), 20);
 		grabForceObserver = getObserverManager().createConditionObserver(grabForce, NotificationType.All,grabForceListener);
 	}
 
