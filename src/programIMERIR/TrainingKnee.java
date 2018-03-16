@@ -75,26 +75,20 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		ResultSet rs = st.executeQuery(sql);
 		if(rs.next()) { 
 		 int id = rs.getInt("first_column_name"); 
-		 String str1 = rs.getString("second_column_name");
-		while(answer != 1){
-			 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-					   "bonjour mm"+nom+sql, "Ok");	
-			 }
-			answer = -1;
+		 String str1 = rs.getString("second_column_name");		
 		}
 		connection.close();
 		} 
 		catch(SQLException sqle){ 
-		   //cf. Comment gérer les erreurs ?  
-			//while(answer != 1){
+		   //cf. Comment gérer les erreurs ?  		
 				 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.ERROR, 
-						   "erreuuuur", "Ok");	
-				// }
-				//answer = -1;
+						   "erreuuuur", "Ok");			
 		} 
 		finally{ 
 		   //cf. Comment bien fermer une connexion ? 
 		        }
+		 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
+				   "bonjour mm"+nom+sql, "Ok");	
 		// your application execution starts here
 		robot.move(ptpHome());
 		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
