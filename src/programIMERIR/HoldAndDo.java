@@ -74,7 +74,6 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 		
 		buttonBar.publish();
-		buttonBar.publish();
 	}
 
 	@Override
