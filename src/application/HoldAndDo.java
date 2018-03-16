@@ -49,7 +49,6 @@ public class HoldAndDo extends RoboticsAPIApplication {
 			@Override
 			public void onKeyEvent(IUserKey key, UserKeyEvent event) {
 				if(event.equals(UserKeyEvent.KeyUp)){
-					polishing = false;
 					moving = !moving;// Allow the robot to move, or stop it.
 					key.setText(UserKeyAlignment.MiddleLeft, moving ? "OFF" : "ON");// If the robot was moving show OFF, else show ON.
 				}
