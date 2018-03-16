@@ -13,7 +13,6 @@ import com.kuka.roboticsAPI.applicationModel.tasks.RoboticsAPITask;
 import com.kuka.roboticsAPI.applicationModel.tasks.UseRoboticsAPIContext;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.JointImpedanceControlMode;
-import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKey;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyBar;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyListener;
@@ -86,26 +85,24 @@ public class HoldAndDo extends RoboticsAPIApplication {
 
 	@Override
 	public void run() {
-		//robot.move(ptpHome());
 		
-		//onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous positionner le robot?", "Oui", "Non");
 		while(!finished){
+			
 			if(moving){
-				getLogger().info("The robot is compliant for 5 seconds...");
-				
+				getLogger().info("The robot is compliant.");
 				key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Green, UserKeyLEDSize.Small);
 				
-				robot.move(positionHold(mode, 5, TimeUnit.SECONDS));
+				while (moving) {
+					robot.move(positionHold(mode, 1, TimeUnit.SECONDS));
+				}
 				
 				getLogger().info("Stop touching the robot.\nThe robot is not compliant anymore.");
-				
 				key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 				
 				jointPosition = robot.getCurrentJointPosition().get();
-				
 				robot.move(ptp(jointPosition));
-				
 			}
+			
 		}
 
 	}
