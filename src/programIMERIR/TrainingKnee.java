@@ -48,7 +48,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 	private String nom;
 	//create d'un int qui recupere le choix de l'utilisateur
 	private int answer;
-	private String URL = "jdbc:mysql://172.31.1.66:3306/infos_patients"; 
+	private String URL = "jdbc:mysql://172.31.1.66:8080/infos_patients"; 
 	private String login = "root"; 
 	private String password = ""; 
 	private String sql ;
