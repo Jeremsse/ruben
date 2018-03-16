@@ -76,13 +76,21 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		if(rs.next()) { 
 		 int id = rs.getInt("first_column_name"); 
 		 String str1 = rs.getString("second_column_name");
-		 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
-				   "bonjour mm"+nom+sql, "Ok");		
+		while(answer != 1){
+			 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, 
+					   "bonjour mm"+nom+sql, "Ok");	
+			 }
+			answer = -1;
 		}
 		connection.close();
 		} 
 		catch(SQLException sqle){ 
 		   //cf. Comment gérer les erreurs ?  
+			while(answer != 1){
+				 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.ERROR, 
+						   "erreuuuur", "Ok");	
+				 }
+				answer = -1;
 		} 
 		finally{ 
 		   //cf. Comment bien fermer une connexion ? 
