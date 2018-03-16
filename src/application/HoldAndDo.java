@@ -92,6 +92,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 			@Override
 			public void onKeyEvent(IUserKey key, UserKeyEvent event) {
 				if(event.equals(UserKeyEvent.KeyUp)){
+					getLogger().info("Programme terminé.");
 					finished = true;
 				}
 			}
@@ -120,6 +121,9 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		buttonBar.publish();
 	}
 
+	/**
+	 * Major function
+	 */
 	@Override
 	public void run() {
 		//While the user hasn't pressed the stopApplicationKey
