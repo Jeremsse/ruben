@@ -65,7 +65,7 @@ public class HoldCompliance extends RoboticsAPIApplication {
 				int missedEvents) {
 			// TODO Auto-generated method stub
 			getLogger().info("Action triggered");
-			lBR_iiwa_14_R820_1.move(ptp(getApplicationData().getFrame("/Foam/P1")).triggerWhen(grabForce, null));
+			lBR_iiwa_14_R820_1.move(ptp(getApplicationData().getFrame("/Foam/P1")));
 		}
 	};
 	
