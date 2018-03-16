@@ -7,14 +7,12 @@ import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptpHome;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.kuka.common.ThreadUtil;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import com.kuka.roboticsAPI.applicationModel.tasks.RoboticsAPITask;
 import com.kuka.roboticsAPI.applicationModel.tasks.UseRoboticsAPIContext;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.Tool;
-import com.kuka.roboticsAPI.motionModel.controlModeModel.JointImpedanceControlMode;
-import com.kuka.roboticsAPI.uiModel.userKeys.IUserKey;
-import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyBar;
 
 /**
  * Implementation of a robot application.
@@ -43,18 +41,8 @@ public class GrabToolsAndWork extends RoboticsAPIApplication {
 	@Inject
 	@Named("Pliers")
 	private Tool pliers;//Création d'un objet outil de type pince
-	private int i;
-
-//	CartesianImpedanceControlMode mode;
-	JointImpedanceControlMode mode;
 	
-	int onPosition = -1;
-	double[] jointPosition;
-	
-	private boolean moving = false;
-	private boolean finished = false;
-	IUserKeyBar buttonBar;
-	IUserKey key;
+	double x, y, z;
 	
 	@Override
 	public void initialize() 
@@ -67,8 +55,15 @@ public class GrabToolsAndWork extends RoboticsAPIApplication {
 	{
 	// your application execution starts here
 	robot.move(ptpHome());  //
+	x = getFrame("/Workspace/P1").getX();
+	y = getFrame("/Workspace/P1").getY();
+	z = getFrame("/Workspace/P1").getZ();
+	
 	pliers.getFrame("ClampingArea").move(ptp(getApplicationData().getFrame("/Workshop/Brush")).setJointVelocityRel(1.0));
+	ThreadUtil.milliSleep(500);
 	robot.move(ptpHome());
+	
+	
 	
 	//programme détection 4 extrémités de la planche
 }
