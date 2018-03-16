@@ -65,6 +65,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 					polishKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Green, UserKeyLEDSize.Small);
 
 					//TODO make the wood plank polishing function (alexandre/louis)
+					polish();
 
 					polishKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 				}
@@ -126,8 +127,6 @@ public class HoldAndDo extends RoboticsAPIApplication {
 			//If the user has pressed the allowMovementKey
 			if(moving){
 				allowMovement();
-			}else if (polishing) {
-				polish();
 			}
 			
 		}
