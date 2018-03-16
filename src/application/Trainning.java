@@ -1,14 +1,15 @@
-package programIMERIR;
+package application;
 
-
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+
+import com.kuka.common.ThreadUtil;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.LBR;
-import com.kuka.roboticsAPI.motionModel.PositionHold;
-import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
+import com.kuka.roboticsAPI.geometricModel.Tool;
+import com.kuka.roboticsAPI.geometricModel.Workpiece;
 
 /**
  * Implementation of a robot application.
@@ -28,22 +29,36 @@ import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceContr
  * @see #run()
  * @see #dispose()
  */
-public class AllSurfacesDrawing extends RoboticsAPIApplication {
+public class Trainning extends RoboticsAPIApplication {
 	@Inject
 	private LBR robot;
-	
-	private CartesianImpedanceControlMode freeMoveMode;
-
+	@Inject
+	@Named("LegLift")
+	private Tool legLift;//Création d'un objet outil
+	@Inject
+	@Named("Leg")
+	private Workpiece leg;
+	//private int i;
 	@Override
 	public void initialize() {
 		// initialize your application here
-		freeMoveMode = new CartesianImpedanceControlMode();
+		legLift.attachTo(robot.getFlange());		
 	}
 
 	@Override
 	public void run() {
 		// your application execution starts here
-		robot.move(ptp(getApplicationData().getFrame("/WorkingTable/WaitingPoint")));
-		robot.move(positionHold(freeMoveMode, -1, TimeUnit.SECONDS));
+		robot.move(ptpHome());
+		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.4));
+		ThreadUtil.milliSleep(10000);//il attend 10s avant de remonter du P1.
+		//de la jambe a l'outil
+		leg.getFrame("/pnpchild").attachTo(legLift.getFrame("/dummy/pnpParentr"));
+		for (int i = 1; i < 5; i++) {
+			leg.getFrame("tcpknee").move(linRel(0, 0, 0,Math.toRadians(-20),0,0).setCartVelocity(30));
+			leg.getFrame("tcpknee").move(linRel(0, 0, 0,Math.toRadians(20),0,0).setCartVelocity(30));				
+		}
+		ThreadUtil.milliSleep(10000);//il attend 10s avant de remonter du P1.
+		leg.detach();//detache la bouteil du crochet
+		robot.move(ptpHome().setJointVelocityRel(0.5));
 	}
 }
