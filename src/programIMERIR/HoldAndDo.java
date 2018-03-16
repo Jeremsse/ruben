@@ -21,6 +21,10 @@ import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceContr
 import com.kuka.roboticsAPI.motionModel.controlModeModel.JointImpedanceControlMode;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.PositionControlMode;
 import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
+import com.kuka.roboticsAPI.uiModel.userKeys.IUserKey;
+import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyBar;
+import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyListener;
+import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyEvent;
 
 /**
  * Implementation of a robot application.
@@ -50,6 +54,9 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	int onPosition = -1;
 	double[] jointPosition;
 	
+	private boolean moving = false;
+	IUserKeyBar buttonBar;
+	
 	@Override
 	public void initialize() {
 		onPosition = -1;
@@ -60,6 +67,16 @@ public class HoldAndDo extends RoboticsAPIApplication {
 
 		mode = new JointImpedanceControlMode(10, 10, 10, 10, 10, 10, 5);
 		mode.setStiffness(10, 10, 10, 10, 10, 10, 5);
+		
+		IUserKeyListener listener = new IUserKeyListener() {
+			@Override
+			public void onKeyEvent(IUserKey key, UserKeyEvent event) {
+				moving = !moving;
+			}
+		};
+		
+		buttonBar = getApplicationUI().createUserKeyBar("Moving");
+		IUserKey openKey = buttonBar.addUserKey(0,listener,true);
 	}
 
 	@Override
@@ -67,7 +84,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		//robot.move(ptpHome());
 		
 		onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous positionner le robot?", "Oui", "Non");
-		while(onPosition == 0){
+		while(moving){
 			robot.move(positionHold(mode, 5, TimeUnit.SECONDS));
 			
 			jointPosition = robot.getCurrentJointPosition().get();
