@@ -91,15 +91,20 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		//onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous positionner le robot?", "Oui", "Non");
 		while(!finished){
 			if(moving){
+				getLogger().info("The robot is compliant for 5 seconds...");
+				
 				key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Green, UserKeyLEDSize.Small);
 				
 				robot.move(positionHold(mode, 5, TimeUnit.SECONDS));
+				
+				getLogger().info("Stop touching the robot.\nThe robot is not compliant anymore.");
+				
+				key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 				
 				jointPosition = robot.getCurrentJointPosition().get();
 				
 				robot.move(ptp(jointPosition));
 				
-				key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 			}
 		}
 
