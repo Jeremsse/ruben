@@ -1,25 +1,18 @@
 package programIMERIR;
 
 
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.positionHold;
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptp;
+
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import com.kuka.common.ThreadUtil;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
-import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
-
-import com.kuka.roboticsAPI.deviceModel.JointPosition;
+import com.kuka.roboticsAPI.applicationModel.tasks.RoboticsAPITask;
+import com.kuka.roboticsAPI.applicationModel.tasks.UseRoboticsAPIContext;
 import com.kuka.roboticsAPI.deviceModel.LBR;
-import com.kuka.roboticsAPI.geometricModel.CartDOF;
-import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
-import com.kuka.roboticsAPI.geometricModel.Tool;
-import com.kuka.roboticsAPI.geometricModel.Workpiece;
-import com.kuka.roboticsAPI.motionModel.IMotion;
-import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.JointImpedanceControlMode;
-import com.kuka.roboticsAPI.motionModel.controlModeModel.PositionControlMode;
 import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKey;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyBar;
@@ -56,6 +49,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	double[] jointPosition;
 	
 	private boolean moving = false;
+	private boolean finished = false;
 	IUserKeyBar buttonBar;
 	
 	@Override
@@ -99,14 +93,16 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		//robot.move(ptpHome());
 		
 		//onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous positionner le robot?", "Oui", "Non");
-		while(moving){
-			robot.move(positionHold(mode, 5, TimeUnit.SECONDS));
-			
-			jointPosition = robot.getCurrentJointPosition().get();
-			
-			robot.move(ptp(jointPosition));
-			//onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous positionner le robot?", "Oui", "Non");
+		while(!finished){
+			if(moving){
+				robot.move(positionHold(mode, 5, TimeUnit.SECONDS));
+				
+				jointPosition = robot.getCurrentJointPosition().get();
+				
+				robot.move(ptp(jointPosition));
+				//onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous positionner le robot?", "Oui", "Non");				
+			}
 		}
-		run();
+
 	}
 }
