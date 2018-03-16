@@ -13,8 +13,10 @@ import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 import com.kuka.roboticsAPI.deviceModel.JointPosition;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.CartDOF;
+import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.Workpiece;
+import com.kuka.roboticsAPI.motionModel.IMotion;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.JointImpedanceControlMode;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.PositionControlMode;
@@ -45,13 +47,17 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	CartesianImpedanceControlMode mode;
 //	JointImpedanceControlMode mode;
 	
+	int onPosition = -1;
+	double[] jointPosition;
+	
 	@Override
 	public void initialize() {
+		onPosition = -1;
 
 		mode = new CartesianImpedanceControlMode();
 		mode.parametrize(CartDOF.TRANSL).setStiffness(100);
 		mode.parametrize(CartDOF.ROT).setStiffness(10);
-		
+
 //		mode = new JointImpedanceControlMode(100, 100, 100, 100, 100, 10, 100);
 //		mode.setStiffness(100, 100, 100, 10, 10, 10, 10);
 	}
@@ -59,8 +65,13 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	@Override
 	public void run() {
 		//robot.move(ptpHome());
-		robot.move(positionHold(mode, -1, TimeUnit.SECONDS));
 		
-		
+		onPosition = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Avez-vous terminé?", "Oui");
+		while(onPosition != 0){
+			robot.move(positionHold(mode, 1, TimeUnit.SECONDS));
+			
+			jointPosition = robot.getCurrentJointPosition().get();
+		}
+		robot.move(ptp(jointPosition));
 	}
 }
