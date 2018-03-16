@@ -143,11 +143,21 @@
                 </additionalInformation>
             </frame>
             <frame id="_42c650d7-1839-4d27-97b1-1d4327f948e1" name="WaitingPoint">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <transformation a="-3.1332357603506527" b="0.004671138378644187" c="3.141551187525913" x="484.14624579166025" y="4.322048731202074" z="166.60902675135367"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1521197879405"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521215021183"/>
                     <info key="Comment" type="java.lang.String" value="Point où le cobot attend d'être positionné par l'opérateur."/>
+                    <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="Flange" tool="Flange" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
+                        <tcpTransformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                    </info>
                 </additionalInformation>
+                <redundancyData>
+                    <redundancy transformationProviderName="KUKA_Sunrise_Cabinet_1/LBR_iiwa_14_R820_1" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="2" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="13" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-7.406250139298813E-5" valueType="java.lang.Double"/>
+                    </redundancy>
+                </redundancyData>
             </frame>
         </frame>
     </world>
