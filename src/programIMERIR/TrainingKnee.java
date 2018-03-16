@@ -48,7 +48,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 	private String nom;
 	//create d'un int qui recupere le choix de l'utilisateur
 	private int answer;
-	private String URL = "localhost"; 
+	private String URL = "http://localhost/phpmyadmin"; 
 	private String login = "root"; 
 	private String password = ""; 
 	private String sql ;
@@ -86,11 +86,11 @@ public class TrainingKnee extends RoboticsAPIApplication {
 		} 
 		catch(SQLException sqle){ 
 		   //cf. Comment gérer les erreurs ?  
-			while(answer != 1){
+			//while(answer != 1){
 				 answer = getApplicationUI().displayModalDialog(ApplicationDialogType.ERROR, 
 						   "erreuuuur", "Ok");	
-				 }
-				answer = -1;
+				// }
+				//answer = -1;
 		} 
 		finally{ 
 		   //cf. Comment bien fermer une connexion ? 
