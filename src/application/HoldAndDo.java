@@ -130,7 +130,6 @@ public class HoldAndDo extends RoboticsAPIApplication {
 			if(moving){
 				allowMovement();
 			}
-			
 		}
 	}
 	
