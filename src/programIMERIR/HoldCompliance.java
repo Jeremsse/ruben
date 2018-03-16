@@ -83,8 +83,10 @@ public class HoldCompliance extends RoboticsAPIApplication {
 	public void run() {
 		// your application execution starts here
 		lBR_iiwa_14_R820_1.move(ptpHome());
+		grabForceObserver.enable();
 		getObserverManager().waitFor(grabForce);
 		
 		//lBR_iiwa_14_R820_1.move(positionHold(mode, -1, TimeUnit.SECONDS));
+		getLogger().info("Fin de l'application");
 	}
 }
