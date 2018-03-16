@@ -65,17 +65,17 @@ public class HoldCompliance extends RoboticsAPIApplication {
 	};
 	
 	private IRisingEdgeListener grabForceListener = new IRisingEdgeListener() {
-		
 		@Override
 		public void onRisingEdge(ConditionObserver conditionObserver, Date time,
 				int missedEvents) {
-			// TODO Auto-generated method stub
+			// Méthode appeler lorsque une force plus fote a 10 N est appliquée
 			getLogger().info("Action triggered");
 			data = robot.getExternalForceTorque(robot.getFlange());
 			Vector force = data.getForce();
 			getLogger().info("evaluate grabForce= " + getObserverManager().evaluate(grabForce));
 			getLogger().info("forces : " + force.getX() + " , " + force.getY() + " , " + force.getZ());
-			robot.move(ptp(getApplicationData().getFrame("/Foam/P1")));
+			//robot.move(ptp(getApplicationData().getFrame("/Foam/P1")));
+			moving = true;
 			freeMovementRobot();
 		}
 	};
