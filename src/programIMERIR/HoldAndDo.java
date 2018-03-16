@@ -19,6 +19,8 @@ import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyBar;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyListener;
 import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyAlignment;
 import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyEvent;
+import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyLED;
+import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyLEDSize;
 
 /**
  * Implementation of a robot application.
@@ -51,6 +53,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	private boolean moving = false;
 	private boolean finished = false;
 	IUserKeyBar buttonBar;
+	IUserKey key;
 	
 	@Override
 	public void initialize() {
@@ -66,24 +69,18 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		IUserKeyListener listener = new IUserKeyListener() {
 			@Override
 			public void onKeyEvent(IUserKey key, UserKeyEvent event) {
-				moving = true;
+				moving = !moving;
+				
+				key.setLED(UserKeyAlignment.MiddleLeft, moving ? UserKeyLED.Green : UserKeyLED.Red, UserKeyLEDSize.Small);
 			}
 		};
 		
-		IUserKeyListener listener2 = new IUserKeyListener() {
-			@Override
-			public void onKeyEvent(IUserKey key, UserKeyEvent event) {
-				moving = false;
-			}
-		};
+		buttonBar = getApplicationUI().createUserKeyBar("Mouvement");
 		
-		buttonBar = getApplicationUI().createUserKeyBar("Moving");
-		
-		IUserKey key = buttonBar.addUserKey(0, listener, true);
+		key = buttonBar.addUserKey(0, listener, true);
 		key.setText(UserKeyAlignment.MiddleLeft, "Bouger le robot");
-		
-		IUserKey key2 = buttonBar.addUserKey(1, listener2, true);
-		key2.setText(UserKeyAlignment.MiddleLeft, "Arreter le robot");
+		key.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
+		key.setCriticalText("Critical problem?");
 		
 		buttonBar.publish();
 	}
