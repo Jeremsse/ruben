@@ -198,7 +198,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		ObjectFrame parent = getApplicationData().getFrame("/Workspace");
 		ObjectFrame newPointFrame = new ObjectFrame(pointNameString, parent , owner, transformationProvider);
 
-		getLogger().info(String.valueOf(transformation.getTranslation().getX()) + "|" + String.valueOf(transformation.getTranslation().getY()) + "|" + String.valueOf(transformation.getTranslation().getZ()));
+		getLogger().info(String.valueOf(newPointFrame.getX()) + "|" + String.valueOf(newPointFrame.getY()) + "|" + String.valueOf(newPointFrame.getZ()));
 
 		getLogger().info("Enregistrement de la position terminé");
 	}
