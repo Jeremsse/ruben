@@ -189,22 +189,17 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		getLogger().info("Enregistrement de la position...");
 
 		currentPointIndex = currentPointIndex == 4 ? 1 : currentPointIndex;
-		getLogger().info("1");
+
 		//parameters
 		String pointNameString = new StringBuilder("NP").append(String.valueOf(currentPointIndex)).toString();//NP1,NP2,NP3,NP4.
-		getLogger().info("2");
 		SceneGraphObject owner = pliers;
-		getLogger().info("3");
 		ITransformation transformation = XyzAbcTransformation.ofTranslation(pliers.getFrame("/Sander").getX(), pliers.getFrame("/Sander").getY(), pliers.getFrame("/Sander").getY());
-		getLogger().info("4");
 		ITransformationProvider transformationProvider = new StaticTransformationProvider(transformation);
-		getLogger().info("5");
 		ObjectFrame parent = getApplicationData().getFrame("/Workspace");
-		getLogger().info("6");
 		ObjectFrame newPointFrame = new ObjectFrame(pointNameString, parent , owner, transformationProvider);
-		getLogger().info("7");
+
 		getLogger().info(String.valueOf(transformation.getTranslation().getX()) + "|" + String.valueOf(transformation.getTranslation().getY()) + "|" + String.valueOf(transformation.getTranslation().getZ()));
-		getLogger().info("9");
+
 		getLogger().info("Enregistrement de la position terminé");
 	}
 }
