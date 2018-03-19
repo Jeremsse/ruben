@@ -135,22 +135,52 @@
                 </additionalInformation>
             </frame>
             <frame id="_b70329fe-b6e8-4fdc-bf88-684a495e26d4" name="point_haut">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <transformation a="-0.12234538518881916" b="-2.700630121326753E-5" c="1.44911969863508" x="-107.82059670502255" y="-800.4096474825755" z="548.6252666427017"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1521449606482"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521454824787"/>
+                    <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="LegLift/Dummy/PNP_parent" tool="LegLift" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
+                        <tcpTransformation a="-1.5707963267948966" b="0.0" c="0.0" x="-38.826061" y="-4.297067" z="174.296734"/>
+                    </info>
                 </additionalInformation>
+                <redundancyData>
+                    <redundancy transformationProviderName="KUKA_Sunrise_Cabinet_1/LBR_iiwa_14_R820_1" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="1" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="22" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-3.09792669736646E-5" valueType="java.lang.Double"/>
+                    </redundancy>
+                </redundancyData>
             </frame>
             <frame id="_2eaa6556-8b6c-448d-943c-ba9bd7bb6c7a" name="point_centre_gauche">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <transformation a="-0.12215879978831222" b="-4.405520251020751E-5" c="1.4489185712778307" x="-107.6760776924564" y="-890.9114775738758" z="464.2243171658386"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1521449652795"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521454801805"/>
+                    <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="LegLift/Dummy/PNP_parent" tool="LegLift" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
+                        <tcpTransformation a="-1.5707963267948966" b="0.0" c="0.0" x="-38.826061" y="-4.297067" z="174.296734"/>
+                    </info>
                 </additionalInformation>
+                <redundancyData>
+                    <redundancy transformationProviderName="KUKA_Sunrise_Cabinet_1/LBR_iiwa_14_R820_1" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="1" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="22" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-2.9601002279980333E-5" valueType="java.lang.Double"/>
+                    </redundancy>
+                </redundancyData>
             </frame>
             <frame id="_f22f9665-2f51-4c07-bead-93edb99fbe87" name="point_centre_droite">
-                <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                <transformation a="-0.12222796683705699" b="-3.3526557594507226E-5" c="1.449089366177192" x="-107.77496341502783" y="-728.8260944715422" z="464.2113194023525"/>
                 <additionalInformation>
-                    <info key="LastModificationTime" type="java.lang.Long" value="1521449673757"/>
+                    <info key="LastModificationTime" type="java.lang.Long" value="1521454784901"/>
+                    <info base="LBR_iiwa_14_R820_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_14_R820_1" tcpName="LegLift/Dummy/PNP_parent" tool="LegLift" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
+                        <tcpTransformation a="-1.5707963267948966" b="0.0" c="0.0" x="-38.826061" y="-4.297067" z="174.296734"/>
+                    </info>
                 </additionalInformation>
+                <redundancyData>
+                    <redundancy transformationProviderName="KUKA_Sunrise_Cabinet_1/LBR_iiwa_14_R820_1" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="1" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="22" valueType="java.lang.Integer"/>
+                        <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-2.894192232119597E-5" valueType="java.lang.Double"/>
+                    </redundancy>
+                </redundancyData>
             </frame>
         </frame>
     </world>
@@ -208,6 +238,6 @@
         <processData comment="Nombre de cycle" dataType="java.lang.Integer" defaultValue="5" displayName="Nombre_cycle" id="nbcycle" max="10.0" min="2.0" unit="cycle" value="5"/>
         <processData comment="Angle de deplacement de la jambe pendant la scéance" dataType="java.lang.Double" defaultValue="20" displayName="Debatement_angulaire" id="angle" max="40.0" min="5.0" unit="°" value="30"/>
         <processData comment="Vitesse de deplacement de la jambe pendant la scéance" dataType="java.lang.Double" defaultValue="20" displayName="Vitesse_angulaire" id="vitesse" max="40.0" min="5.0" unit="mm/s" value="30"/>
-        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom" id="name" value="xxxx"/>
+        <processData dataType="java.lang.String" defaultValue="0" displayName="Nom" id="name" value="PAUL"/>
     </processDataContainer>
 </RoboticsAPIData>
