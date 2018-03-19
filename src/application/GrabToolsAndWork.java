@@ -58,36 +58,38 @@ public class GrabToolsAndWork extends RoboticsAPIApplication {
 	@Override
 	public void run() 
 	{
-	// your application execution starts here
-	robot.move(ptpHome());  //
-	x = getFrame("/Workspace/P1").getX();
-	y = getFrame("/Workspace/P1").getY();
-	z = getFrame("/Workspace/P1").getZ();
-	x2 = getFrame("/Workspace/P2").getX();
-	y2 = getFrame("/Workspace/P2").getY();
-	z2 = getFrame("/Workspace/P2").getZ();
-	x3 = getFrame("/Workspace/P3").getX();
-	y3 = getFrame("/Workspace/P3").getY();
-	z3 = getFrame("/Workspace/P3").getZ();
-	x4 = getFrame("/Workspace/P4").getX();
-	y4 = getFrame("/Workspace/P4").getY();
-	z4 = getFrame("/Workspace/P4").getZ();
-	
-	/*double largeur;
-	largeur = x4-x;
-	double pourcentage;
-	pourcentage = largeurOutil / largeur;*/
-	
-	pliers.getFrame("/Sander").move(ptp(getApplicationData().getFrame("/Workspace/P1")).setJointVelocityRel(1.0));
-	for(i = x; i<x4; i+=largeurOutil)
-	{
-		pliers.getFrame("/Sander").move(linRel(0.0, 0.0, -10.0).setJointVelocityRel(1.0));
-		pliers.getFrame("/Sander").move(linRel(0.0, y2, 0.0).setJointVelocityRel(1.0));
-		pliers.getFrame("/Sander").move(linRel(0.0, 0.0, 60.0).setJointVelocityRel(1.0));
-		pliers.getFrame("/Sander").move(linRel(0.0, -y2, 0.0).setJointVelocityRel(1.0));
-		pliers.getFrame("/Sander").move(linRel(0.0, 0.0, -50.0).setJointVelocityRel(1.0));
-		pliers.getFrame("/Sander").move(linRel(i, 0.0, 0.0).setJointVelocityRel(1.0));
-	}
-	robot.move(ptpHome());
+		// your application execution starts here
+		x = getFrame("/Workspace/P1").getX();
+		y = getFrame("/Workspace/P1").getY();
+		z = getFrame("/Workspace/P1").getZ();
+		x2 = getFrame("/Workspace/P2").getX();
+		y2 = getFrame("/Workspace/P2").getY();
+		z2 = getFrame("/Workspace/P2").getZ();
+		x3 = getFrame("/Workspace/P3").getX();
+		y3 = getFrame("/Workspace/P3").getY();
+		z3 = getFrame("/Workspace/P3").getZ();
+		x4 = getFrame("/Workspace/P4").getX();
+		y4 = getFrame("/Workspace/P4").getY();
+		z4 = getFrame("/Workspace/P4").getZ();
+		
+		/*double largeur;
+		largeur = x4-x;
+		double pourcentage;
+		pourcentage = largeurOutil / largeur;*/
+		
+		
+		robot.move(ptpHome());  //
+
+		pliers.getFrame("/Sander").move(ptp(getApplicationData().getFrame("/Workspace/P1")).setJointVelocityRel(1.0));
+		for(i = x; i<x4; i+=largeurOutil)
+		{
+			pliers.getFrame("/Sander").move(linRel(0.0, 0.0, -10.0).setJointVelocityRel(1.0));
+			pliers.getFrame("/Sander").move(linRel(0.0, y2, 0.0).setJointVelocityRel(1.0));
+			pliers.getFrame("/Sander").move(linRel(0.0, 0.0, 60.0).setJointVelocityRel(1.0));
+			pliers.getFrame("/Sander").move(linRel(0.0, -y2, 0.0).setJointVelocityRel(1.0));
+			pliers.getFrame("/Sander").move(linRel(0.0, 0.0, -50.0).setJointVelocityRel(1.0));
+			pliers.getFrame("/Sander").move(linRel(i, 0.0, 0.0).setJointVelocityRel(1.0));
+		}
+		robot.move(ptpHome());
 	}
 }
