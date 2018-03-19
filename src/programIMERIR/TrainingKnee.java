@@ -91,11 +91,13 @@ public class TrainingKnee extends RoboticsAPIApplication {
 				current_nom = resultat.getString( "Prenom" );
 			}
 		} catch (SQLException sqle) {
-			sqle.printStackTrace();
+			//sqle.printStackTrace();
 			answer = getApplicationUI().displayModalDialog(
 					ApplicationDialogType.ERROR, "erreur connection", "Ok");
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			answer = getApplicationUI().displayModalDialog(
+					ApplicationDialogType.ERROR, "erreur ClassNotFoundException", "Ok");
 		} finally {
 			try {
 				connection.close();
