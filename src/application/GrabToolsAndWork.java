@@ -2,6 +2,7 @@ package application;
 
 
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.lin;
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.linRel;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptp;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptpHome;
 
@@ -12,6 +13,7 @@ import com.kuka.common.ThreadUtil;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import com.kuka.roboticsAPI.applicationModel.tasks.RoboticsAPITask;
 import com.kuka.roboticsAPI.applicationModel.tasks.UseRoboticsAPIContext;
+import com.kuka.roboticsAPI.deviceModel.JointPosition;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 
@@ -79,7 +81,7 @@ public class GrabToolsAndWork extends RoboticsAPIApplication {
 	pliers.getFrame("ClampingArea").move(ptp(getApplicationData().getFrame("/Workspace/P1")).setJointVelocityRel(1.0));
 	for(x = getFrame("/Workspace/P1").getX(); x<x4; x+=largeurOutil)
 	{
-		pliers.getFrame("ClampingArea").move(lin().setJointVelocityRel(1.0));
+		pliers.getFrame("ClampingArea").move(linRel(0.0, 0.0, -20.0, 0.0, 0.0, 0.0).setJointVelocityRel(1.0));
 	}
 	robot.move(ptpHome());
 	
