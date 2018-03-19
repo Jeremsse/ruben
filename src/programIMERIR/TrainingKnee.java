@@ -1,30 +1,33 @@
 package programIMERIR;
 
+
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.linRel;
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptp;
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptpHome;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.kuka.common.ThreadUtil;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
-import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
+import com.kuka.roboticsAPI.applicationModel.tasks.UseRoboticsAPIContext;
 import com.kuka.roboticsAPI.deviceModel.LBR;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.Workpiece;
-import com.kuka.roboticsAPI.persistenceModel.processDataModel.IProcessData;
 import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
-import java.sql.*;
 
 /**
  * Implementation of a robot application.
  * <p>
- * The application provides a {@link RoboticsAPITask#initialize()} and a
- * {@link RoboticsAPITask#run()} method, which will be called successively in
- * the application lifecycle. The application will terminate automatically after
- * the {@link RoboticsAPITask#run()} method has finished or after stopping the
- * task. The {@link RoboticsAPITask#dispose()} method will be called, even if an
- * exception is thrown during initialization or run.
+ * The application provides a {@link RoboticsAPITask#initialize()} and a 
+ * {@link RoboticsAPITask#run()} method, which will be called successively in 
+ * the application lifecycle. The application will terminate automatically after 
+ * the {@link RoboticsAPITask#run()} method has finished or after stopping the 
+ * task. The {@link RoboticsAPITask#dispose()} method will be called, even if an 
+ * exception is thrown during initialization or run. 
  * <p>
- * <b>It is imperative to call <code>super.dispose()</code> when overriding the
- * {@link RoboticsAPITask#dispose()} method.</b>
+ * <b>It is imperative to call <code>super.dispose()</code> when overriding the 
+ * {@link RoboticsAPITask#dispose()} method.</b> 
  * 
  * @see UseRoboticsAPIContext
  * @see #initialize()
@@ -36,114 +39,58 @@ public class TrainingKnee extends RoboticsAPIApplication {
 	private LBR robot;
 	@Inject
 	@Named("LegLift")
-	private Tool legLift;// Création d'un objet outil
+	private Tool legLift;//Création d'un objet outil
 	@Inject
 	@Named("Leg")
 	private Workpiece leg;
 	private int i;
-	// var accessible via le processdata
-
-	private Integer tempo, nbcycles;
-	private Double angle, anglespeed;
-	private String nom;
-	// create d'un int qui recupere le choix de l'utilisateur
+	// Variables accessibles via le ProcessData"
+	private Integer tempo,
+					nbCycles;
+	private Double angle,
+				   angleSpeed; 
+	//Création d'un entier qui récupère le choix de l'utilisateur
 	private int answer;
-	private String URL;
-	private String login;
-	private String password;
-	private String sql;
-	private Connection connection;
-	private Statement stmt;
-	private ResultSet resultat;
-	private  String current_nom;
-
+	private int cycle;
+	
 	@Override
 	public void initialize() {
 		// initialize your application here
 		legLift.attachTo(robot.getFlange());
-		tempo = getApplicationData().getProcessData("tempo").getValue();
-		nbcycles = getApplicationData().getProcessData("nbcycles").getValue();
-		angle = getApplicationData().getProcessData("angle").getValue();
-		anglespeed = getApplicationData().getProcessData("anglespeed")
-				.getValue();
-		nom = getApplicationData().getProcessData("Nom").getValue();
-		answer = -1;
-		URL = "jdbc:mysql://172.31.1.66:80/infos_patients";
-		login = "root";
-		password = "";
-		connection = null;
-		stmt = null;
-		resultat =  null;
+		tempo=getApplicationData().getProcessData("tempo").getValue();
+		nbCycles=getApplicationData().getProcessData("nbCycles").getValue();
+		angle=getApplicationData().getProcessData("angle").getValue();
+		angleSpeed=getApplicationData().getProcessData("angleSpeed").getValue();
+		//initialisation de answer à une valeur non utilisée par la boîte de dialogue
+		answer=-1;
+		cycle = -1;
 	}
 
 	@Override
 	public void run() {
-		// se connecter a la base de données
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(URL, login, password);
-			// interaction avec la base
-			sql = "SELECT Prenom FROM infos_patients WHERE Nom = '$nom'";
-			stmt = connection.createStatement();
-			resultat = stmt.executeQuery(sql);		
-			/* Récupération des données du résultat de la requête de lecture */
-			while ( resultat.next() ) {
-				current_nom = resultat.getString( "Prenom" );
-			}
-		} catch (SQLException sqle) {
-			//sqle.printStackTrace();
-			answer = getApplicationUI().displayModalDialog(
-					ApplicationDialogType.ERROR, "erreur connection", "Ok");
-		} catch (ClassNotFoundException e) {
-			//e.printStackTrace();
-			answer = getApplicationUI().displayModalDialog(
-					ApplicationDialogType.ERROR, "erreur ClassNotFoundException", "Ok");
-		} finally {
-			try {
-				connection.close();
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		answer = getApplicationUI().displayModalDialog(
-				ApplicationDialogType.QUESTION, "bonjour mm" + nom + current_nom, "Ok");
-		
 		// your application execution starts here
 		robot.move(ptpHome());
-		legLift.getFrame("/dummy/pnpParent").move(
-				ptp(getApplicationData().getFrame("/Knee/P1"))
-						.setJointVelocityRel(0.5));
+		legLift.getFrame("/dummy/pnpParent").move(ptp(getApplicationData().getFrame("/Knee/P1")).setJointVelocityRel(0.5));
+		// initialisation de la variable answer avec le message
 
-		// initialiser answer avec le message
-		answer = getApplicationUI()
-				.displayModalDialog(ApplicationDialogType.QUESTION,
-						"la jambe est en place?", "oui");
-		ThreadUtil.milliSleep(tempo);
-		// Ancrage de la jambe à l'outil
-		leg.getFrame("/PnpChild")
-				.attachTo(legLift.getFrame("/dummy/pnpParent"));
-
-		while (answer != 1) {
-			for (i = 1; i < nbcycles; i++) {
-				leg.getFrame("TCPKnee").move(
-						linRel(0, 0, 0, Math.toRadians(-angle), 0, 0)
-								.setCartVelocity(anglespeed));
-				leg.getFrame("TCPKnee").move(
-						linRel(0, 0, 0, Math.toRadians(angle), 0, 0)
-								.setCartVelocity(anglespeed));
+		do {
+			cycle = getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "Voulez-vous lancer un cycle?", "Oui", "Non");
+			
+			if(cycle == 0){
+				answer=getApplicationUI().displayModalDialog(ApplicationDialogType.QUESTION, "La jambe est elle en place?", "Oui");
+				ThreadUtil.milliSleep(tempo);
+				// Ancrage de la jambe à l'outil
+				leg.getFrame("/PnpChild").attachTo(legLift.getFrame("/dummy/pnpParent"));
+				for (i = 1 ; i < nbCycles ; i++){
+					leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(-angle),0, 0).setCartVelocity(angleSpeed));
+					leg.getFrame("TCPKnee").move(linRel(0, 0, 0, Math.toRadians(angle),0, 0).setCartVelocity(angleSpeed));
+				}
+				ThreadUtil.milliSleep(tempo);
 			}
-			answer = getApplicationUI().displayModalDialog(
-					ApplicationDialogType.QUESTION,
-					"voulez vous refaire un cycle Mr/Mme :" + nom + "?", "oui",
-					"non");
-		}
-		answer = -1;
-
-		answer = getApplicationUI().displayModalDialog(
-				ApplicationDialogType.QUESTION,
-				"Avez vous enlever la jambe Mr/Mmme:" + nom + "?", "oui");
-		ThreadUtil.milliSleep(tempo);
+			
+		} while (cycle == 0);
+		
+		//fin
 		leg.detach();
 		robot.move(ptpHome().setJointVelocityRel(0.5));
 	}

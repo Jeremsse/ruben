@@ -48,6 +48,5 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/IMERIRSunriseProject/KUKAJavaLib/#Bundle-JavaDoc#!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.0.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
