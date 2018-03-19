@@ -119,6 +119,6 @@ public class HoldCompliance extends RoboticsAPIApplication {
 		}while((Math.abs(force.getX()) 
 				+ Math.abs(force.getY()) 
 				+ Math.abs(force.getZ())) 
-				>= 20);
+				>= 10);
 	}
 }
