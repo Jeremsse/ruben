@@ -3,6 +3,7 @@ package programIMERIR;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.math.*;
 
 import javax.inject.Inject;
 
@@ -22,6 +23,7 @@ import com.kuka.roboticsAPI.motionModel.IMotion;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.JointImpedanceControlMode;
 import com.kuka.roboticsAPI.sensorModel.ForceSensorData;
+import com.sun.org.apache.xerces.internal.parsers.AbstractDOMParser;
 import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import com.kuka.roboticsAPI.conditionModel.*;
 import com.kuka.roboticsAPI.geometricModel.math.*;
@@ -70,10 +72,6 @@ public class HoldCompliance extends RoboticsAPIApplication {
 				int missedEvents) {
 			// Méthode appeler lorsque une force plus fote a 10 N est appliquée
 			getLogger().info("Action triggered");
-			data = robot.getExternalForceTorque(robot.getFlange());
-			Vector force = data.getForce();
-			getLogger().info("evaluate grabForce= " + getObserverManager().evaluate(grabForce));
-			getLogger().info("forces : " + force.getX() + " , " + force.getY() + " , " + force.getZ());
 			//robot.move(ptp(getApplicationData().getFrame("/Foam/P1")));
 			moving = true;
 			freeMovementRobot();
@@ -111,8 +109,16 @@ public class HoldCompliance extends RoboticsAPIApplication {
 	}
 	
 	public void freeMovementRobot(){
-		while(moving){
+		Vector force;
+		do{
+			data = robot.getExternalForceTorque(robot.getFlange());
+			force = data.getForce();
+			getLogger().info("evaluate grabForce= " + getObserverManager().evaluate(grabForce));
+			getLogger().info("forces : " + force.getX() + " , " + force.getY() + " , " + force.getZ());
 			robot.move(positionHold(mode,1, TimeUnit.SECONDS));
-		}
+		}while((Math.abs(force.getX()) 
+				+ Math.abs(force.getY()) 
+				+ Math.abs(force.getZ())) 
+				>= 20);
 	}
 }
