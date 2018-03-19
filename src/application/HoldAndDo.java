@@ -199,7 +199,7 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		getLogger().info("4");
 		ITransformationProvider transformationProvider = new StaticTransformationProvider(transformation);
 		getLogger().info("5");
-		ObjectFrame parent = getApplicationData().getFrame("Workspace");
+		ObjectFrame parent = getApplicationData().getFrame("/Workspace");
 		getLogger().info("6");
 		ObjectFrame newPointFrame = new ObjectFrame(pointNameString, parent , owner, transformationProvider);
 		getLogger().info("7");
