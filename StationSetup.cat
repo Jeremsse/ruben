@@ -149,6 +149,9 @@
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="IOManager" installItem="true" installedVersion="1" itemPath="com.kuka/IOManager" selectedVersion="1" usage="Library">
                 <Interface id="com.kuka/IOManager/IOManager" version="0.1.0"/>
             </SoftwareItem>
+            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="Ikarus AntiVirus Definition Files" installItem="true" installedVersion="NONE" itemPath="com.kuka/IkarusAntiVirDefinition" selectedVersion="NONE" usage="Library"/>
+            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="Ikarus AntiVirus" installItem="false" installedVersion="NONE" itemPath="com.kuka/IkarusAntiVirInstallation" selectedVersion="NONE" usage="Feature"/>
+            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="Ikarus AntiVirus SmartHMI" installItem="true" installedVersion="NONE" itemPath="com.kuka/IkarusAntiVirSmartHMI" selectedVersion="NONE" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="InjectionLib" installItem="true" installedVersion="1" itemPath="com.kuka/InjectionLib" selectedVersion="1" usage="Library">
                 <Interface id="com.kuka/InjectionLib/InjectionLib" version="0.1.0"/>
             </SoftwareItem>
@@ -611,6 +614,8 @@
                 <Interface id="com.kuka/OSGi/com.kuka.roboticsAPI.applicationServer.services.handGuidingService" version="1.15.0"/>
                 <Interface id="com.kuka/Bundle/com.kuka.service.handGuiding.ncf" version="1.15.0"/>
             </SoftwareItem>
+            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="Ikarus AntiVirus Service" installItem="true" installedVersion="NONE" itemPath="com.kuka/com.kuka.service.virusScanner" selectedVersion="NONE" usage="Library"/>
+            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="com.kuka.service.virusScanner.ncf" installItem="true" installedVersion="NONE" itemPath="com.kuka/com.kuka.service.virusScanner.ncf" selectedVersion="NONE" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="com.kuka.smartPad.api" installItem="true" installedVersion="NONE" itemPath="com.kuka/com.kuka.smartPad.api" selectedVersion="NONE" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="com.kuka.smartPad.impl" installItem="true" installedVersion="NONE" itemPath="com.kuka/com.kuka.smartPad.impl" selectedVersion="NONE" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="com.kuka.statuscontroller" installItem="true" installedVersion="NONE" itemPath="com.kuka/com.kuka.statuscontroller" selectedVersion="NONE" usage="Library"/>
