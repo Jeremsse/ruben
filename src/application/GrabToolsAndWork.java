@@ -78,13 +78,16 @@ public class GrabToolsAndWork extends RoboticsAPIApplication {
 	double pourcentage;
 	pourcentage = largeurOutil / largeur;*/
 	
-	pliers.getFrame("ClampingArea").move(ptp(getApplicationData().getFrame("/Workspace/P1")).setJointVelocityRel(1.0));
-	pliers.getFrame("ClampingArea").move(linRel(0.0, 0.0, -20.0, 0.0, 0.0, 0.0).setJointVelocityRel(1.0));
-	for(i = getFrame("/Workspace/P1").getX(); i<x4; i+=largeurOutil)
+	pliers.getFrame("/Sander").move(ptp(getApplicationData().getFrame("/Workspace/P1")).setJointVelocityRel(1.0));
+	for(i = x; i<x4; i+=largeurOutil)
 	{
-		pliers.getFrame("ClampingArea").move(linRel(i, 0.0, 0.0, 0.0, 0.0, 0.0).setJointVelocityRel(1.0));
+		pliers.getFrame("/Sander").move(linRel(0.0, 0.0, -10.0).setJointVelocityRel(1.0));
+		pliers.getFrame("/Sander").move(linRel(0.0, y2, 0.0).setJointVelocityRel(1.0));
+		pliers.getFrame("/Sander").move(linRel(0.0, 0.0, 60.0).setJointVelocityRel(1.0));
+		pliers.getFrame("/Sander").move(linRel(0.0, -y2, 0.0).setJointVelocityRel(1.0));
+		pliers.getFrame("/Sander").move(linRel(0.0, 0.0, -50.0).setJointVelocityRel(1.0));
+		pliers.getFrame("/Sander").move(linRel(i, 0.0, 0.0).setJointVelocityRel(1.0));
 	}
 	robot.move(ptpHome());
-	
 	}
 }
