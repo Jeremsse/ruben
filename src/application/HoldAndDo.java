@@ -28,8 +28,8 @@ import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyLEDSize;
 public class HoldAndDo extends RoboticsAPIApplication {
 	@Inject
 	private LBR robot;
-	@Named("Sander")
-	private Tool sander;//Création d'un objet outil
+//	@Named("Sander")
+//	private Tool sander;//Création d'un objet outil
 
 	private JointImpedanceControlMode mode;
 	private double[] jointPosition;
