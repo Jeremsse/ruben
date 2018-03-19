@@ -7,11 +7,9 @@ import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptp;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import com.kuka.roboticsAPI.deviceModel.LBR;
-import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.JointImpedanceControlMode;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKey;
 import com.kuka.roboticsAPI.uiModel.userKeys.IUserKeyBar;
@@ -28,8 +26,6 @@ import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyLEDSize;
 public class HoldAndDo extends RoboticsAPIApplication {
 	@Inject
 	private LBR robot;
-//	@Named("Sander")
-//	private Tool sander;//Création d'un objet outil
 
 	private JointImpedanceControlMode mode;
 	private double[] jointPosition;
@@ -177,7 +173,8 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	 * Register the current state as a position.
 	 */
 	private void registerPosition(){
-//		getLogger().info("Enregistrement de la position...");
-//		getLogger().info("Enregistrement de la position terminé");
+		getLogger().info("Enregistrement de la position...");
+		
+		getLogger().info("Enregistrement de la position terminé");
 	}
 }

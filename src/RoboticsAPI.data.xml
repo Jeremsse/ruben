@@ -189,18 +189,29 @@
         </workpieceTemplate>
         <toolTemplate class="" name="Pliers">
             <frames>
+<<<<<<< HEAD
                 <frame id="_7afa787a-39d5-4933-b917-b30d7fddb756" name="ClampingArea">
                     <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="12.0"/>
+=======
+                <frame id="_7afa787a-39d5-4933-b917-b30d7fddb756" name="Sander">
+                    <transformation a="0.0" b="0.0" c="0.0" x="-60.0" y="0.0" z="30.0"/>
+                </frame>
+                <frame id="_b5409303-9f42-440b-9174-08c80e0c90a9" name="Brush">
+                    <transformation a="0.0" b="0.0" c="0.0" x="60.0" y="0.0" z="30.0"/>
+>>>>>>> 25482064fa46849ed86b946329f7a0cfb461958d
                 </frame>
             </frames>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.5"/>
         </toolTemplate>
+<<<<<<< HEAD
         <workpieceTemplate class="" name="Brush">
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.125"/>
         </workpieceTemplate>
         <workpieceTemplate class="" name="Sander">
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.5"/>
         </workpieceTemplate>
+=======
+>>>>>>> 25482064fa46849ed86b946329f7a0cfb461958d
     </objectTemplates>
     <processDataContainer>
         <processData dataType="java.lang.Integer" defaultValue="1000" displayName="Temporisation" id="tempo" max="10000.0" min="1000.0" unit="ms" value="1000"/>
