@@ -68,7 +68,7 @@ public class TrainingKnee extends RoboticsAPIApplication {
 				.getValue();
 		nom = getApplicationData().getProcessData("Nom").getValue();
 		answer = -1;
-		URL = "jdbc:mysql://172.31.1.66:3306/infos_patients";
+		URL = "jdbc:mysql://172.31.1.66:80/infos_patients";
 		login = "root";
 		password = "";
 		connection = null;
