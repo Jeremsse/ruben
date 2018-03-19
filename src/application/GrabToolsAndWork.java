@@ -45,7 +45,7 @@ public class GrabToolsAndWork extends RoboticsAPIApplication {
 	@Named("Pliers")
 	private Tool pliers;//Création d'un objet outil de type pince
 	
-	double x, y, z, x2, y2, z2, x3, y3, z3, x4, y4, z4;
+	double x, y, z, x2, y2, z2, x3, y3, z3, x4, y4, z4, i;
 	
 	double largeurOutil = 60;
 	
@@ -79,9 +79,10 @@ public class GrabToolsAndWork extends RoboticsAPIApplication {
 	pourcentage = largeurOutil / largeur;*/
 	
 	pliers.getFrame("ClampingArea").move(ptp(getApplicationData().getFrame("/Workspace/P1")).setJointVelocityRel(1.0));
-	for(x = getFrame("/Workspace/P1").getX(); x<x4; x+=largeurOutil)
+	pliers.getFrame("ClampingArea").move(linRel(0.0, 0.0, -20.0, 0.0, 0.0, 0.0).setJointVelocityRel(1.0));
+	for(i = getFrame("/Workspace/P1").getX(); i<x4; i+=largeurOutil)
 	{
-		pliers.getFrame("ClampingArea").move(linRel(0.0, 0.0, -20.0, 0.0, 0.0, 0.0).setJointVelocityRel(1.0));
+		pliers.getFrame("ClampingArea").move(linRel(i, 0.0, 0.0, 0.0, 0.0, 0.0).setJointVelocityRel(1.0));
 	}
 	robot.move(ptpHome());
 	
