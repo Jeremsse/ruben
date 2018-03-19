@@ -95,13 +95,13 @@ public class HoldCompliance extends RoboticsAPIApplication {
 		robot.move(ptp(getApplicationData().getFrame("/WorkingTable/WaitingPoint")));
 		grabForceObserver.enable();
 		//getObserverManager().waitFor(grabForce);
-		while(true){
-			data = robot.getExternalForceTorque(robot.getFlange());
-			Vector force = data.getForce();
-			getLogger().info("evaluate grabForce= " + getObserverManager().evaluate(grabForce));
-			getLogger().info("forces : " + force.getX() + " , " + force.getY() + " , " + force.getZ());
-			ThreadUtil.milliSleep(1000);
-		}
+//		while(true){
+//			data = robot.getExternalForceTorque(robot.getFlange());
+//			Vector force = data.getForce();
+//			getLogger().info("evaluate grabForce= " + getObserverManager().evaluate(grabForce));
+//			getLogger().info("forces : " + force.getX() + " , " + force.getY() + " , " + force.getZ());
+//			ThreadUtil.milliSleep(1000);
+//		}
 			
 		
 		//lBR_iiwa_14_R820_1.move(positionHold(mode, -1, TimeUnit.SECONDS));
