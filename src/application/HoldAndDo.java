@@ -179,9 +179,5 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	private void registerPosition(){
 //		getLogger().info("Enregistrement de la position...");
 //		getLogger().info("Enregistrement de la position terminé");
-
-		getLogger().info(String.valueOf(robot.getRootFrame().getX()));
-		getLogger().info(String.valueOf(robot.getRootFrame().getY()));
-		getLogger().info(String.valueOf(robot.getRootFrame().getZ()));
 	}
 }
