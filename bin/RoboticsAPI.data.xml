@@ -199,7 +199,7 @@
             </frames>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="170.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.01"/>
         </workpieceTemplate>
-        <toolTemplate class="" name="Pen">
+        <toolTemplate class="" name="Pliers">
             <frames>
                 <frame id="_7afa787a-39d5-4933-b917-b30d7fddb756" name="Sander">
                     <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="50.0"/>

@@ -1,9 +1,14 @@
 package application;
 
 
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.circ;
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.lin;
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.linRel;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.positionHold;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptp;
+import static com.kuka.roboticsAPI.motionModel.BasicMotions.ptpHome;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -11,6 +16,7 @@ import javax.inject.Named;
 
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import com.kuka.roboticsAPI.deviceModel.LBR;
+import com.kuka.roboticsAPI.geometricModel.Frame;
 import com.kuka.roboticsAPI.geometricModel.ITransformationProvider;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.SceneGraphObject;
@@ -52,8 +58,14 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	
 	private int currentPointIndex;//the index of the point being registered
 	
+	//Variables polishing
+	private ArrayList<ObjectFrame> framePoints;
+	double largeurOutil = 60;
+	
 	@Override
 	public void initialize() {
+		pliers.attachTo(robot.getFlange());//"Fixation" de l'outil à la bride du robot.
+		
 		mode = new JointImpedanceControlMode(10, 10, 10, 10, 10, 10, 1);
 		mode.setStiffness(10, 10, 10, 10, 10, 10, 1);
 		
@@ -75,7 +87,6 @@ public class HoldAndDo extends RoboticsAPIApplication {
 				if(event.equals(UserKeyEvent.KeyUp)){
 					polishKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Green, UserKeyLEDSize.Small);
 
-					//TODO make the wood plank polishing function (alexandre/louis)
 					polish();
 
 					polishKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
@@ -90,7 +101,6 @@ public class HoldAndDo extends RoboticsAPIApplication {
 				if(event.equals(UserKeyEvent.KeyUp)){
 					registerPositionKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 
-					//TODO make the position registering function (clement)
 					registerPosition();
 
 					registerPositionKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
@@ -130,6 +140,8 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		
 		//Make the buttons bar visible
 		buttonBar.publish();
+		
+		framePoints = new ArrayList<ObjectFrame>(){ { add(null); add(null); add(null); add(null); } };
 	}
 
 	/**
@@ -171,14 +183,31 @@ public class HoldAndDo extends RoboticsAPIApplication {
 	 */
 	private void polish(){
 		getLogger().info("Ponçage...");
-		
 		polishKey.setText(UserKeyAlignment.MiddleLeft, "Ponçage...");
 		polishKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Green, UserKeyLEDSize.Small);
 
-		//TODO make the polishing function
-
-		polishKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
+		/*-----------------------------TODO make the polishing function--------------------------------------------------------*/
 		
+		pliers.getFrame("Sander").move(ptp(framePoints.get(0)));
+		pliers.getFrame("Sander").move(lin(framePoints.get(1)));
+		robot.move(circ(getApplicationData().getFrame("/Workspace/P3"),
+				framePoints.get(0)));
+		
+		
+		for(double i = framePoints.get(0).getX(); i < framePoints.get(3).getX(); i += largeurOutil) {
+			pliers.getFrame("Sander").move(linRel(0.0, 0.0, -10.0).setJointVelocityRel(1.0));
+			pliers.getFrame("Sander").move(linRel(0.0, framePoints.get(1).getY(), 0.0).setJointVelocityRel(1.0));
+			pliers.getFrame("Sander").move(linRel(0.0, 0.0, 60.0).setJointVelocityRel(1.0));
+			pliers.getFrame("Sander").move(linRel(0.0, -framePoints.get(1).getY(), 0.0).setJointVelocityRel(1.0));
+			pliers.getFrame("Sander").move(linRel(0.0, 0.0, -50.0).setJointVelocityRel(1.0));
+			pliers.getFrame("Sander").move(linRel(i, 0.0, 0.0).setJointVelocityRel(1.0));
+		}
+		robot.move(ptpHome());
+		
+		/*-------------------------------------------------------------------------------------------------------------------*/
+		
+		
+		polishKey.setLED(UserKeyAlignment.MiddleLeft, UserKeyLED.Red, UserKeyLEDSize.Small);
 		getLogger().info("Ponçage terminé.");
 	}
 	
@@ -193,12 +222,16 @@ public class HoldAndDo extends RoboticsAPIApplication {
 		//parameters
 		String pointNameString = new StringBuilder("NP").append(String.valueOf(currentPointIndex)).toString();//NP1,NP2,NP3,NP4.
 		SceneGraphObject owner = pliers;
-		ITransformation transformation = XyzAbcTransformation.ofTranslation(pliers.getFrame("/Sander").getX(), pliers.getFrame("/Sander").getY(), pliers.getFrame("/Sander").getZ());
+		
+		Frame toolVector = robot.getPositionInformation(pliers.getFrame("/Sander")).getCurrentCartesianPosition();
+
+		ITransformation transformation = XyzAbcTransformation.ofTranslation(toolVector.getX(), toolVector.getY(), toolVector.getZ());
+		
 		ITransformationProvider transformationProvider = new StaticTransformationProvider(transformation);
 		ObjectFrame parent = getApplicationData().getFrame("/Workspace");
 		ObjectFrame newPointFrame = new ObjectFrame(pointNameString, parent , owner, transformationProvider);
 
-		getLogger().info(String.valueOf(newPointFrame.getX()) + "|" + String.valueOf(newPointFrame.getY()) + "|" + String.valueOf(newPointFrame.getZ()));
+		framePoints.set(currentPointIndex - 1, newPointFrame);
 
 		getLogger().info("Enregistrement de la position terminé");
 	}
